@@ -1,0 +1,185 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AdcTimeHook	adc.c	57;"	function	signature:(void)
+AdcTimeHook	adc.h	7;"	prototype	signature:(void)
+BIT0	typedef.h	30;"	macro
+BIT1	typedef.h	31;"	macro
+BIT2	typedef.h	32;"	macro
+BIT3	typedef.h	33;"	macro
+BIT4	typedef.h	34;"	macro
+BIT5	typedef.h	35;"	macro
+BIT6	typedef.h	36;"	macro
+BIT7	typedef.h	37;"	macro
+Clr165clkLow	key.c	7;"	macro	file:
+Clr165ssLow	key.c	5;"	macro	file:
+ClrSck	typedef.h	47;"	macro
+ClrSda	typedef.h	41;"	macro
+CopyDispMap	display.h	27;"	macro
+DEF_16BIT_REG_AT	stm8s103k.h	20;"	macro
+DEF_16BIT_REG_AT	stm8s103k.h	25;"	macro
+DEF_8BIT_REG_AT	stm8s103k.h	19;"	macro
+DEF_8BIT_REG_AT	stm8s103k.h	24;"	macro
+DelayTick	delay.h	6;"	prototype	signature:(u8 delay)
+Delayms	delay.h	8;"	prototype	signature:(u16 ms)
+Delayus	delay.h	7;"	prototype	signature:(u16 us)
+DisplayInitPoweron	display.c	56;"	function	signature:(void)
+DisplayInitPoweron	display.h	35;"	prototype	signature:(void)
+EEPROM_ADDR_BASE	eeprom.h	9;"	macro
+EepromProgramByte	eeprom.c	20;"	function	signature:(u8 * addr, u8 dat)
+EepromProgramByte	eeprom.h	22;"	prototype	signature:(u8 * addr, u8 dat)
+EepromProgramDword	eeprom.c	42;"	function	signature:(u8 * addr, u32 dat)
+EepromProgramDword	eeprom.h	24;"	prototype	signature:(u8 * addr, u32 dat)
+EepromProgramWord	eeprom.c	30;"	function	signature:(u8 * addr, u16 dat)
+EepromProgramWord	eeprom.h	23;"	prototype	signature:(u8 * addr, u16 dat)
+EepromReadByte	eeprom.h	18;"	macro
+EepromReadDword	eeprom.c	62;"	function	signature:(u8 * addr)
+EepromReadDword	eeprom.h	20;"	prototype	signature:(u8 * addr)
+EepromReadWord	eeprom.c	56;"	function	signature:(u8 * addr)
+EepromReadWord	eeprom.h	19;"	prototype	signature:(u8 * addr)
+Get165dat	key.c	8;"	macro	file:
+Get74hc165Data	key.c	21;"	function	file:	signature:(void)
+GetCurHc165Map	key.h	26;"	macro
+GetCurKeyValue	key.h	25;"	macro
+GetCurWaterLevel	normal.h	45;"	prototype	signature:(void)
+GetHeat1	normal.h	24;"	macro
+GetHeat2	normal.h	25;"	macro
+GetHeat3	normal.h	26;"	macro
+GetLed	normal.h	16;"	macro
+GetLight	normal.h	12;"	macro
+GetSda	typedef.h	42;"	macro
+GetWaterLevel_H	normal.h	33;"	macro
+GetWaterLevel_L	normal.h	31;"	macro
+GetWaterLevel_M	normal.h	32;"	macro
+HEAT1_TIME_ADDR	eeprom.h	14;"	macro
+HEAT2_TIME_ADDR	eeprom.h	15;"	macro
+HEAT3_TIME_ADDR	eeprom.h	16;"	macro
+Heat1Off	normal.h	19;"	macro
+Heat1On	normal.h	18;"	macro
+Heat2Off	normal.h	21;"	macro
+Heat2On	normal.h	20;"	macro
+Heat3Off	normal.h	23;"	macro
+Heat3On	normal.h	22;"	macro
+IWDG_Feed	main.c	51;"	macro	file:
+IWDG_Feed	main.c	62;"	macro	file:
+InitAdc	adc.c	69;"	function	signature:(void)
+InitAdc	adc.h	8;"	prototype	signature:(void)
+Iwdg_Init	main.c	53;"	function	file:	signature:(void)
+Iwdg_Init	main.c	64;"	function	file:	signature:(void)
+KEY_CALLBACK	key.h	23;"	typedef
+KEY_STATUS_KEEP	key.h	18;"	enumerator	enum:__anon2
+KEY_STATUS_KEEPED	key.h	19;"	enumerator	enum:__anon2
+KEY_STATUS_NOPRESS	key.h	16;"	enumerator	enum:__anon2
+KEY_STATUS_PRESS	key.h	17;"	enumerator	enum:__anon2
+KEY_VALUE_NOKEY	key.h	10;"	enumerator	enum:__anon1
+KEY_VALUE_ON_OFF	key.h	11;"	enumerator	enum:__anon1
+KeyFuntion	key.c	85;"	function	signature:(void)
+KeyFuntion	key.h	31;"	prototype	signature:(void)
+KeyInit	key.c	128;"	function	signature:(void)
+KeyInit	key.h	34;"	prototype	signature:(void)
+KeyScan	key.c	41;"	function	file:	signature:(void)
+KeyTimeHook	key.c	117;"	function
+KeyTimeHook	key.h	32;"	prototype	signature:(void)
+LCD_A	display.h	7;"	macro
+LCD_B	display.h	8;"	macro
+LCD_C	display.h	9;"	macro
+LCD_C_C	display.h	21;"	macro
+LCD_C_E	display.h	22;"	macro
+LCD_C_H	display.h	16;"	macro
+LCD_C_L	display.h	18;"	macro
+LCD_C_h	display.h	20;"	macro
+LCD_C_i	display.h	17;"	macro
+LCD_C_o	display.h	19;"	macro
+LCD_D	display.h	10;"	macro
+LCD_DP	display.h	14;"	macro
+LCD_E	display.h	11;"	macro
+LCD_F	display.h	12;"	macro
+LCD_G	display.h	13;"	macro
+LCD_MAP_OFF	display.h	24;"	macro
+LedOff	normal.h	15;"	macro
+LedOn	normal.h	14;"	macro
+LedOnOff	normal.h	50;"	prototype	signature:(_bool flag)
+LightOff	normal.h	11;"	macro
+LightOn	normal.h	10;"	macro
+LightOnOff	normal.h	49;"	prototype	signature:(_bool flag)
+LockEeprom	eeprom.c	15;"	function	signature:(void)
+NULL	typedef.h	7;"	macro
+NonHandledInterrupt	stm8_interrupt_vector.c	12;"	function	signature:(void)
+NormalInit	normal.h	54;"	prototype	signature:(void)
+NormalTimeHook	normal.h	52;"	prototype	signature:(void)
+SET_FLAG_STR_ADDR	eeprom.h	10;"	macro
+STM8S003K3	stm8s003k3.h	3;"	macro
+STM8S103K	stm8s103k.h	12;"	macro
+SYSTEM_TICK	typedef.h	15;"	macro
+SaveTempTimeForUart	normal.h	53;"	prototype	signature:(u16 minute, u8 temp)
+Set165clkHigh	key.c	6;"	macro	file:
+Set165ssHigh	key.c	4;"	macro	file:
+SetKeyCallback	key.c	123;"	function	signature:(KEY_CALLBACK * pCallback)
+SetKeyCallback	key.h	33;"	prototype	signature:(KEY_CALLBACK * pCallback)
+SetSck	typedef.h	46;"	macro
+SetSda	typedef.h	40;"	macro
+SetSdaInput	typedef.h	44;"	macro
+SetSdaOutput	typedef.h	43;"	macro
+StatusOutOff	normal.h	29;"	macro
+StatusOutOn	normal.h	28;"	macro
+SteamOnOff	normal.h	48;"	prototype	signature:(_bool flag)
+StopForLinkErr	normal.h	51;"	prototype	signature:(void)
+SystemInit	main.c	14;"	function	signature:(void)
+SystemOnOff	normal.h	47;"	prototype	signature:(_bool flag)
+TEMP_DIFF	normal.h	8;"	macro
+TEMP_SET_ADDR	eeprom.h	11;"	macro
+TEMP_ZERO	normal.h	7;"	macro
+TIM1_Init	main.c	35;"	function	file:	signature:(void)
+TIM1_UPD_OVF_IRQHandler	main.c	29;"	function	signature:(void)
+TIM1_UPD_OVF_IRQHandler	stm8_interrupt_vector.c	22;"	prototype	file:	signature:(void)
+TIM2_UPD_OVF_IRQHandler	display.c	30;"	function	signature:(void)
+TIM2_UPD_OVF_IRQHandler	stm8_interrupt_vector.c	23;"	prototype	file:	signature:(void)
+TIME_SET_ADDR	eeprom.h	12;"	macro
+UnlockEeprom	eeprom.c	5;"	function	signature:(void)
+UpdateDisplay	display.h	26;"	macro
+__ADC_H__	adc.h	4;"	macro
+__ASM	typedef.h	10;"	macro
+__DELAY_H__	delay.h	4;"	macro
+__DISPLAY_H__	display.h	5;"	macro
+__EEPROM_H__	eeprom.h	6;"	macro
+__KEY_H__	key.h	5;"	macro
+__MAIN_H__	main.h	5;"	macro
+__MODS0__	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\mods0.h	11;"	macro
+__NORMAL_H__	normal.h	5;"	macro
+__STM8S103K__	stm8s103k.h	6;"	macro
+__TYPEDEF_H__	typedef.h	19;"	macro
+_bool	typedef.h	27;"	typedef
+_hc165_map	key.c	19;"	variable
+_hc165_map_tmp	key.c	19;"	variable
+_led_disp_map	display.c	27;"	variable
+_led_num_tab	display.c	3;"	variable
+_led_scan_com	display.c	26;"	variable	file:
+_vectab	stm8_interrupt_vector.c	25;"	variable
+enumKeyStatus	key.h	20;"	typedef	typeref:enum:__anon2
+enumKeyValue	key.h	12;"	typedef	typeref:enum:__anon1
+interrupt_handler	stm8_interrupt_vector.c	9;"	member	struct:interrupt_vector	file:
+interrupt_handler_t	stm8_interrupt_vector.c	5;"	typedef	file:
+interrupt_instruction	stm8_interrupt_vector.c	8;"	member	struct:interrupt_vector	file:
+interrupt_vector	stm8_interrupt_vector.c	7;"	struct	file:
+keyRepeatTime	key.c	12;"	variable	file:
+keyShakeTime	key.c	11;"	variable	file:
+keyStatus	key.c	15;"	variable	file:
+keyTimeSecond	key.c	14;"	variable	file:
+keyValue	key.c	18;"	variable
+led_update_flag	display.c	23;"	variable
+main	main.c	73;"	function
+main	stm8_interrupt_vector.c	21;"	prototype	file:
+nop	typedef.h	14;"	macro
+pDispCallback	display.c	24;"	variable	file:
+pDispTickCallback	display.c	25;"	variable	file:
+pKeyCallback	key.c	16;"	variable	file:
+s16	typedef.h	23;"	typedef
+s32	typedef.h	25;"	typedef
+s8	typedef.h	21;"	typedef
+tick_flag	main.c	12;"	variable	file:
+u16	typedef.h	24;"	typedef
+u32	typedef.h	26;"	typedef
+u8	typedef.h	22;"	typedef
