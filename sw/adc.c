@@ -1,6 +1,7 @@
 #include "adc.h"
 #include "normal.h"
 
+
 //==========================================================
 /*static @tiny u8 _buf_index;
 static @near u16 _buf[16];
@@ -40,17 +41,19 @@ static u16 GetAverage(void)
 
 //==========================================================
 //ch: 0~15
-/*u16 GetAdc(u8 ch)
+
+u16 GetAdc(u8 ch)
 {
-	ADC_CSR = ch;
-	//ADC_CR1 |= BIT0; //wakeup
-	ADC_CR1 |= BIT0; //start
-	while(0 == ADC_CSR & BIT7)
+	switch(ch)
 	{
-		//nop();
+		case 2:
+			return (ADC_DB2R);
+		case 3:
+			return (ADC_DB3R);
+		default:
+			return (0);
 	}
-	return ( ((u16)ADC_DRL) | (((u16)ADC_DRH) << 8) );
-}*/
+}
 
 //==========================================================
 
@@ -68,16 +71,20 @@ void AdcTimeHook(void)
 
 void InitAdc(void)
 {
-	PD_DDR &= ~(BIT3);
-	PD_CR1 &= ~(BIT3);
-	PD_CR2 &= ~(BIT3);
+	PC_DDR &= ~(BIT4);
+	PC_CR1 &= ~(BIT4);
+	PC_CR2 &= ~(BIT4);
+	
+	PD_DDR &= ~(BIT2);
+	PD_CR1 &= ~(BIT2);
+	PD_CR2 &= ~(BIT2);
 	
 	CLK_PCKENR2 |= BIT3;       //ADC
-	ADC_CR1 = (7 << 4) |  BIT1 | BIT0; //18分频
-	ADC_CR2 = BIT3;            //right align
+	ADC_CR1 = (7 << 4) |  BIT1 | BIT0; //18分频 连续转换
+	ADC_CR2 = BIT3 | BIT1;            //right align 扫描模式
 	ADC_CR3 = BIT7;            //data buffer enable
-	ADC_CSR = 4;
-	ADC_CR1 |= BIT0; //wakeup
-	ADC_CR1 |= BIT0; //start
+	ADC_CSR = 3;
+	ADC_CR1 |= BIT0; //wakeup*/
+	//ADC_CR1 |= BIT0; //start
 }
 //==========================================================

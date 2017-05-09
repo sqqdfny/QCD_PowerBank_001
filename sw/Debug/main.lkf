@@ -50,10 +50,13 @@
 # Object files list - section reserved for STVD
 #<BEGIN OBJECT_FILES>
 Debug\adc.o
+Debug\delay.o
 Debug\display.o
 Debug\eeprom.o
 Debug\key.o
 Debug\main.o
+Debug\normal.o
+Debug\tp5602.o
 #<END OBJECT_FILES>
 
 

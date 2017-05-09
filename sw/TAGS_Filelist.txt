@@ -1,9 +1,12 @@
 adc.c
+delay.c
 display.c
 eeprom.c
 key.c
 main.c
+normal.c
 stm8_interrupt_vector.c
+tp5602.c
 adc.h
 eeprom.h
 key.h
@@ -15,3 +18,4 @@ c:\program files (x86)\cosmic\cxstm8_32k\hstm8\mods0.h
 delay.h
 display.h
 normal.h
+tp5602.h

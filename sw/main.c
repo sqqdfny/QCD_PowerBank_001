@@ -7,9 +7,12 @@
 #include "main.h"
 #include "key.h"
 #include "adc.h"
+#include "delay.h"
 #include "display.h"
+#include "normal.h"
+#include "tp5602.h"
 
-static _bool tick_flag;
+static bool tick_flag;
 //==========================================================
 void SystemInit(void)
 {
@@ -56,7 +59,6 @@ static void TIM1_Init(void)
 		IWDG_KR = 0x55;
 		IWDG_PR = 2;      //63.7ms
 		IWDG_RLR = 0xff;
-		IWDG_KR = 0xaa;
 	}
 #else
 	#define IWDG_Feed()   
@@ -75,11 +77,17 @@ main()
 	Iwdg_Init();
 	SystemInit();
 	
+	TP5602InitPoweron();
 	KeyInit();
 	TIM1_Init();
 	InitAdc();
 	DisplayInitPoweron();
 	_asm("rim");   
+	
+	Delayms(1000);
+	EnterNormal();
+	
+	IWDG_Feed();
 	
 	while (1)
 	{
@@ -89,9 +97,9 @@ main()
 			IWDG_Feed();
 			
 			AdcTimeHook();
-			KeyTimeHook();
-			
+			Tp5602Funtion();
 			KeyFuntion();
+			RefreshDisplay();
 		}
 	#ifndef DEBUG
 		_asm("wfi");

@@ -6,7 +6,9 @@ void DelayTick(u8 delay)
 }
 
 void Delayus(u16 us){
-	DelayTick(10);
+	DelayTick(250);
+	DelayTick(250);
+	DelayTick(250);
 }	
 void Delayms(u16 ms){
 	while(ms--)

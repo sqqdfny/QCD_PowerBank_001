@@ -10,6 +10,9 @@ ExternDep= adc.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  adc.h
 [Root.Source Files.adc.c.Config.1]
 ExternDep= adc.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  adc.h typedef.h stm8s003k3.h STM8S103K.h normal.h
 
+[Root.Source Files.delay.c.Config.0]
+ExternDep= delay.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  delay.h typedef.h stm8s003k3.h STM8S103K.h
+
 [Root.Source Files.display.c.Config.0]
 ExternDep= display.c  "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h" display.h typedef.h  stm8s003k3.h STM8S103K.h
 
@@ -26,13 +29,19 @@ ExternDep= key.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  key.h
 ExternDep= key.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  key.h typedef.h stm8s003k3.h STM8S103K.h delay.h
 
 [Root.Source Files.main.c.Config.0]
-ExternDep= main.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  main.h typedef.h stm8s003k3.h STM8S103K.h key.h adc.h display.h
+ExternDep= main.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  main.h typedef.h stm8s003k3.h STM8S103K.h key.h adc.h delay.h display.h  normal.h tp5602.h
 
 [Root.Source Files.main.c.Config.1]
 ExternDep= main.c "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"  main.h typedef.h stm8s003k3.h STM8S103K.h key.h adc.h
+
+[Root.Source Files.normal.c.Config.0]
+ExternDep= normal.c  "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h" normal.h typedef.h  stm8s003k3.h STM8S103K.h key.h adc.h display.h tp5602.h
 
 [Root.Source Files.stm8_interrupt_vector.c.Config.0]
 ExternDep= stm8_interrupt_vector.c  "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"
 
 [Root.Source Files.stm8_interrupt_vector.c.Config.1]
 ExternDep= stm8_interrupt_vector.c  "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h"
+
+[Root.Source Files.tp5602.c.Config.0]
+ExternDep= tp5602.c  "C:\Program Files (x86)\COSMIC\CXSTM8_32K\Hstm8\mods0.h" tp5602.h typedef.h  stm8s003k3.h STM8S103K.h adc.h

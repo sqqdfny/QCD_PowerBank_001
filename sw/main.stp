@@ -298,6 +298,11 @@ String.6.0=2014,12,16,20,54,18
 [Root.Source Files.adc.c]
 ElemType=File
 PathName=adc.c
+Next=Root.Source Files.delay.c
+
+[Root.Source Files.delay.c]
+ElemType=File
+PathName=delay.c
 Next=Root.Source Files.display.c
 
 [Root.Source Files.display.c]
@@ -318,11 +323,21 @@ Next=Root.Source Files.main.c
 [Root.Source Files.main.c]
 ElemType=File
 PathName=main.c
+Next=Root.Source Files.normal.c
+
+[Root.Source Files.normal.c]
+ElemType=File
+PathName=normal.c
 Next=Root.Source Files.stm8_interrupt_vector.c
 
 [Root.Source Files.stm8_interrupt_vector.c]
 ElemType=File
 PathName=stm8_interrupt_vector.c
+Next=Root.Source Files.tp5602.c
+
+[Root.Source Files.tp5602.c]
+ElemType=File
+PathName=tp5602.c
 
 [Root.Include Files]
 ElemType=Folder

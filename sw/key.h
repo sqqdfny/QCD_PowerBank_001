@@ -15,6 +15,7 @@ typedef enum
 {
 	KEY_STATUS_NOPRESS = 0,
 	KEY_STATUS_PRESS,     //按下
+	KEY_STATUS_DOUBLE,    //双击
 	KEY_STATUS_KEEP,      //保持
 	KEY_STATUS_KEEPED     //长按已响应,避免重复响应
 }enumKeyStatus;
@@ -23,13 +24,12 @@ typedef enum
 typedef char (KEY_CALLBACK)(enumKeyValue value, enumKeyStatus status, u8 second);
 
 #define GetCurKeyValue() keyValue
-#define GetCurHc165Map() _hc165_map
 
 extern @tiny enumKeyValue keyValue;       //当前键值
 extern @tiny u8 _hc165_map;
 
 void KeyFuntion(void);
-void KeyTimeHook(void);
+
 void SetKeyCallback(KEY_CALLBACK * pCallback);
 void KeyInit(void);
 

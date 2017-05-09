@@ -51,10 +51,13 @@ crtsi0.sm8
 # Object files list - section reserved for STVD
 #<BEGIN OBJECT_FILES>
 Release\adc.o
+Release\delay.o
 Release\display.o
 Release\eeprom.o
 Release\key.o
 Release\main.o
+Release\normal.o
+Release\tp5602.o
 #<END OBJECT_FILES>
 
 

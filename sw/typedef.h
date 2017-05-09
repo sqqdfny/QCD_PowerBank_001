@@ -24,7 +24,11 @@ typedef short int          s16;
 typedef unsigned short int u16;
 typedef long int           s32;
 typedef unsigned long int  u32;
-typedef _Bool              _bool;
+typedef enum
+{
+	false = 0,
+	true = !false
+}bool;
 
 
 #define BIT0     0x01
