@@ -1,8 +1,9 @@
 #include "tp5602.h"
 #include "adc.h"
+#include "main.h"
 
 
-static u8 curBattVoltage;
+static u16 curBattVoltage;
 static u8 curBattCapacity;
 static u8 curInputVoltage;
 
@@ -10,7 +11,7 @@ static u8 second_count;
 static bool tp5602_key_press_flag;
 //==========================================================
 //电池电压
-u8 GetBattVoltage(void)
+u16 GetBattVoltage(void)
 {
 	return (curBattVoltage);
 }
@@ -34,13 +35,20 @@ bool IsConnectedInputPower(void)
 
 bool IsBoostOut(void)
 {
-	return ((PA_IDR & BIT2) ? true : false);
+	return (((PA_IDR & BIT2) > 0) ? true : false);
 }
+//==========================================================
 //==========================================================
 void Tp5602KeyPress(void)
 {
 	PA_ODR |= BIT1;
 	tp5602_key_press_flag = false;
+}
+//==========================================================
+//计算电池当前剩余电量
+static void CalculationCurBattCapacity(void)
+{
+	
 }
 //==========================================================
 //在主循环中每 10ms 调用一次
@@ -61,8 +69,10 @@ void Tp5602Funtion(void)
 	if((second_count ++) > 10)
 	{
 		second_count = 0;
-		curBattVoltage = (u8)((((u32)GetAdc(ADC_CH_BATT)) * 99) >> 11);
-		curInputVoltage = (u8)((((u32)GetAdc(ADC_CH_INPUT)) * 99) >> 9);
+		curBattVoltage = (u16)((((u32)GetAdc(ADC_CH_BATT)) * 495) >> 10);
+		CalculationCurBattCapacity();
+		
+		curInputVoltage = (u8)((((u32)GetAdc(ADC_CH_INPUT)) * 99) >> 9) + 8;
 	}
 }
 //==========================================================

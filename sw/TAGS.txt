@@ -10,16 +10,18 @@ ALL_DISP_PIN_INPUT_F	display.c	10;"	macro	file:
 ALL_DISP_PIN_LOW	display.c	4;"	macro	file:
 AdcTimeHook	adc.c	60;"	function	signature:(void)
 AdcTimeHook	adc.h	10;"	prototype	signature:(void)
-BIT0	typedef.h	30;"	macro
-BIT1	typedef.h	31;"	macro
-BIT2	typedef.h	32;"	macro
-BIT3	typedef.h	33;"	macro
-BIT4	typedef.h	34;"	macro
-BIT5	typedef.h	35;"	macro
-BIT6	typedef.h	36;"	macro
-BIT7	typedef.h	37;"	macro
-ClrSck	typedef.h	47;"	macro
-ClrSda	typedef.h	41;"	macro
+AdcTriggerConvert	adc.c	65;"	function	signature:(void)
+BIT0	typedef.h	34;"	macro
+BIT1	typedef.h	35;"	macro
+BIT2	typedef.h	36;"	macro
+BIT3	typedef.h	37;"	macro
+BIT4	typedef.h	38;"	macro
+BIT5	typedef.h	39;"	macro
+BIT6	typedef.h	40;"	macro
+BIT7	typedef.h	41;"	macro
+CalculationCurBattCapacity	tp5602.c	49;"	function	file:	signature:(void)
+ClrSck	typedef.h	51;"	macro
+ClrSda	typedef.h	45;"	macro
 DEF_16BIT_REG_AT	stm8s103k.h	20;"	macro
 DEF_16BIT_REG_AT	stm8s103k.h	25;"	macro
 DEF_8BIT_REG_AT	stm8s103k.h	19;"	macro
@@ -52,12 +54,13 @@ Delayms	delay.c	13;"	function	signature:(u16 ms)
 Delayms	delay.h	8;"	prototype	signature:(u16 ms)
 Delayus	delay.c	8;"	function	signature:(u16 us)
 Delayus	delay.h	7;"	prototype	signature:(u16 us)
-Display	normal.c	100;"	function	signature:(void)
+Display	normal.c	233;"	function	file:	signature:(void)
+Display	standby.c	41;"	function	file:	signature:(void)
 DisplayEnterSleep	display.c	292;"	function	signature:(void)
 DisplayEnterSleep	display.h	66;"	prototype	signature:(void)
-DisplayExitSleep	display.c	297;"	function	signature:(void)
+DisplayExitSleep	display.c	299;"	function	signature:(void)
 DisplayExitSleep	display.h	67;"	prototype	signature:(void)
-DisplayInitPoweron	display.c	301;"	function	signature:(void)
+DisplayInitPoweron	display.c	311;"	function	signature:(void)
 DisplayInitPoweron	display.h	69;"	prototype	signature:(void)
 EEPROM_ADDR_BASE	eeprom.h	9;"	macro
 EepromProgramByte	eeprom.c	20;"	function	signature:(u8 * addr, u8 dat)
@@ -71,31 +74,43 @@ EepromReadDword	eeprom.c	62;"	function	signature:(u8 * addr)
 EepromReadDword	eeprom.h	20;"	prototype	signature:(u8 * addr)
 EepromReadWord	eeprom.c	56;"	function	signature:(u8 * addr)
 EepromReadWord	eeprom.h	19;"	prototype	signature:(u8 * addr)
-EnterNormal	normal.c	110;"	function	signature:(void)
-EnterNormal	normal.h	7;"	prototype	signature:(void)
+EnterNormal	normal.c	257;"	function	signature:(void)
+EnterNormal	normal.h	10;"	prototype	signature:(void)
+EnterSleep	main.c	77;"	function	signature:(void)
+EnterSleep	main.h	7;"	prototype	signature:(void)
+EnterStandby	standby.c	46;"	function	signature:(void)
+EnterStandby	standby.h	8;"	prototype	signature:(void)
+ExitSleep	main.c	83;"	function	signature:(void)
+ExitSleep	main.h	8;"	prototype	signature:(void)
 GetAdc	adc.c	45;"	function	signature:(u8 ch)
 GetAdc	adc.h	9;"	prototype	signature:(u8 ch)
-GetBattCapacity	tp5602.c	18;"	function	signature:(void)
+GetBattCapacity	tp5602.c	20;"	function	signature:(void)
 GetBattCapacity	tp5602.h	11;"	prototype	signature:(void)
-GetBattVoltage	tp5602.c	12;"	function	signature:(void)
+GetBattVoltage	tp5602.c	14;"	function	signature:(void)
 GetBattVoltage	tp5602.h	8;"	prototype	signature:(void)
 GetCurKeyValue	key.h	26;"	macro
-GetInputVoltage	tp5602.c	24;"	function	signature:(void)
+GetInputVoltage	tp5602.c	26;"	function	signature:(void)
 GetInputVoltage	tp5602.h	14;"	prototype	signature:(void)
-GetSda	typedef.h	42;"	macro
+GetSda	typedef.h	46;"	macro
 HEAT1_TIME_ADDR	eeprom.h	14;"	macro
 HEAT2_TIME_ADDR	eeprom.h	15;"	macro
 HEAT3_TIME_ADDR	eeprom.h	16;"	macro
-IWDG_Feed	main.c	54;"	macro	file:
-IWDG_Feed	main.c	64;"	macro	file:
-InitAdc	adc.c	72;"	function	signature:(void)
+IWDG_Feed	main.c	57;"	macro	file:
+IWDG_Feed	main.c	67;"	macro	file:
+InitAdc	adc.c	71;"	function	signature:(void)
 InitAdc	adc.h	11;"	prototype	signature:(void)
-IsBoostOut	tp5602.c	34;"	function	signature:(void)
-IsConnectedInputPower	tp5602.c	29;"	function	signature:(void)
+IsBoostOut	tp5602.c	36;"	function	signature:(void)
+IsBoostOut	tp5602.h	20;"	prototype	signature:(void)
+IsConnectedInputPower	tp5602.c	31;"	function	signature:(void)
+IsConnectedInputPower	tp5602.h	17;"	prototype	signature:(void)
+IsDispNormal	normal.c	267;"	function	signature:(void)
+IsDispNormal	normal.h	12;"	prototype	signature:(void)
 IsDisplay	display.c	285;"	function	signature:(DISP_CALLBACK * pDisp)
 IsDisplay	display.h	64;"	prototype	signature:(DISP_CALLBACK * pDisp)
-Iwdg_Init	main.c	56;"	function	file:	signature:(void)
-Iwdg_Init	main.c	66;"	function	file:	signature:(void)
+IsLedStateOn	normal.c	29;"	function	signature:(void)
+IsLedStateOn	normal.h	8;"	prototype	signature:(void)
+Iwdg_Init	main.c	59;"	function	file:	signature:(void)
+Iwdg_Init	main.c	69;"	function	file:	signature:(void)
 KEY_CALLBACK	key.h	24;"	typedef
 KEY_STATUS_DOUBLE	key.h	18;"	enumerator	enum:__anon3
 KEY_STATUS_KEEP	key.h	19;"	enumerator	enum:__anon3
@@ -104,12 +119,14 @@ KEY_STATUS_NOPRESS	key.h	16;"	enumerator	enum:__anon3
 KEY_STATUS_PRESS	key.h	17;"	enumerator	enum:__anon3
 KEY_VALUE_NOKEY	key.h	10;"	enumerator	enum:__anon2
 KEY_VALUE_ON_OFF	key.h	11;"	enumerator	enum:__anon2
-Key	normal.c	77;"	function	file:	signature:(enumKeyValue value, enumKeyStatus status, u8 second)
+Key	normal.c	191;"	function	file:	signature:(enumKeyValue value, enumKeyStatus status, u8 second)
+Key	standby.c	17;"	function	file:	signature:(enumKeyValue value, enumKeyStatus status, u8 second)
 KeyFuntion	key.c	68;"	function	signature:(void)
 KeyFuntion	key.h	31;"	prototype	signature:(void)
 KeyInit	key.c	108;"	function	signature:(void)
 KeyInit	key.h	34;"	prototype	signature:(void)
-KeyOnOff	normal.c	27;"	function	file:	signature:(enumKeyStatus status)
+KeyOnOff	normal.c	124;"	function	file:	signature:(enumKeyStatus status)
+KeyOnOff	standby.c	9;"	function	file:	signature:(enumKeyStatus status)
 KeyScan	key.c	16;"	function	file:	signature:(void)
 LCD_A	display.h	9;"	macro
 LCD_B	display.h	10;"	macro
@@ -128,16 +145,19 @@ LCD_F	display.h	14;"	macro
 LCD_G	display.h	15;"	macro
 LED_B_OFF	display.h	30;"	macro
 LED_B_ON	display.h	29;"	macro
+LED_R_B_SWITCH_DELAY	normal.c	9;"	macro	file:
+LED_R_B_SWITCH_INTERVAL	normal.c	10;"	macro	file:
 LED_R_OFF	display.h	32;"	macro
 LED_R_ON	display.h	31;"	macro
-LED_STATE_B_ON	normal.c	14;"	enumerator	enum:__anon1	file:
-LED_STATE_MAX	normal.c	16;"	enumerator	enum:__anon1	file:
-LED_STATE_OFF	normal.c	11;"	enumerator	enum:__anon1	file:
-LED_STATE_R_B_SWITCH	normal.c	15;"	enumerator	enum:__anon1	file:
-LED_STATE_R_ON	normal.c	13;"	enumerator	enum:__anon1	file:
-LED_STATE_W_ON	normal.c	12;"	enumerator	enum:__anon1	file:
+LED_STATE_B_ON	normal.c	18;"	enumerator	enum:__anon1	file:
+LED_STATE_MAX	normal.c	20;"	enumerator	enum:__anon1	file:
+LED_STATE_OFF	normal.c	15;"	enumerator	enum:__anon1	file:
+LED_STATE_R_B_SWITCH	normal.c	19;"	enumerator	enum:__anon1	file:
+LED_STATE_R_ON	normal.c	17;"	enumerator	enum:__anon1	file:
+LED_STATE_W_ON	normal.c	16;"	enumerator	enum:__anon1	file:
 LED_W_OFF	display.h	28;"	macro
 LED_W_ON	display.h	27;"	macro
+Led_R_B_Switch	normal.c	39;"	function	file:	signature:(void)
 LockEeprom	eeprom.c	15;"	function	signature:(void)
 NULL	typedef.h	7;"	macro
 NonHandledInterrupt	stm8_interrupt_vector.c	12;"	function	signature:(void)
@@ -152,23 +172,26 @@ SetDispCallback	display.c	278;"	function	signature:(DISP_CALLBACK * pDisp, DISP_
 SetDispCallback	display.h	62;"	prototype	signature:(DISP_CALLBACK * pDisp, DISP_TICK_CALLBACK * pDispTick)
 SetKeyCallback	key.c	103;"	function	signature:(KEY_CALLBACK * pCallback)
 SetKeyCallback	key.h	33;"	prototype	signature:(KEY_CALLBACK * pCallback)
-SetSck	typedef.h	46;"	macro
-SetSda	typedef.h	40;"	macro
-SetSdaInput	typedef.h	44;"	macro
-SetSdaOutput	typedef.h	43;"	macro
-SystemInit	main.c	17;"	function	signature:(void)
+SetSck	typedef.h	50;"	macro
+SetSda	typedef.h	44;"	macro
+SetSdaInput	typedef.h	48;"	macro
+SetSdaOutput	typedef.h	47;"	macro
+SystemInit	main.c	19;"	function	signature:(void)
 TEMP_SET_ADDR	eeprom.h	11;"	macro
-TIM1_Init	main.c	38;"	function	file:	signature:(void)
-TIM1_UPD_OVF_IRQHandler	main.c	32;"	function	signature:(void)
+TIM1_Init	main.c	41;"	function	file:	signature:(void)
+TIM1_UPD_OVF_IRQHandler	main.c	35;"	function	signature:(void)
 TIM1_UPD_OVF_IRQHandler	stm8_interrupt_vector.c	22;"	prototype	file:	signature:(void)
 TIM2_UPD_OVF_IRQHandler	display.c	79;"	function	signature:(void)
 TIM2_UPD_OVF_IRQHandler	stm8_interrupt_vector.c	23;"	prototype	file:	signature:(void)
 TIME_SET_ADDR	eeprom.h	12;"	macro
-TP5602InitPoweron	tp5602.c	50;"	function	signature:(void)
-TP5602InitPoweron	tp5602.h	18;"	prototype	signature:(void)
-TimeHook	normal.c	92;"	function	signature:(void)
-Tp5602Funtion	tp5602.c	40;"	function	signature:(void)
-Tp5602Funtion	tp5602.h	17;"	prototype	signature:(void)
+TP5602InitPoweron	tp5602.c	79;"	function	signature:(void)
+TP5602InitPoweron	tp5602.h	27;"	prototype	signature:(void)
+TimeHook	normal.c	206;"	function	file:	signature:(void)
+TimeHook	standby.c	32;"	function	file:	signature:(void)
+Tp5602Funtion	tp5602.c	55;"	function	signature:(void)
+Tp5602Funtion	tp5602.h	26;"	prototype	signature:(void)
+Tp5602KeyPress	tp5602.c	42;"	function	signature:(void)
+Tp5602KeyPress	tp5602.h	24;"	prototype	signature:(void)
 UnlockEeprom	eeprom.c	5;"	function	signature:(void)
 UpdateDisplay	display.h	35;"	macro
 __ADC_H__	adc.h	4;"	macro
@@ -180,23 +203,25 @@ __KEY_H__	key.h	5;"	macro
 __MAIN_H__	main.h	5;"	macro
 __MODS0__	c:\program files (x86)\cosmic\cxstm8_32k\hstm8\mods0.h	11;"	macro
 __NORMAL_H__	normal.h	5;"	macro
+__STANDBY_H__	standby.h	5;"	macro
 __STM8S103K__	stm8s103k.h	6;"	macro
 __TP5602_H__	tp5602.h	5;"	macro
 __TYPEDEF_H__	typedef.h	19;"	macro
 _led_disp_map	display.c	75;"	variable
 _led_num_tab	display.c	40;"	variable
 _led_scan_com	display.c	76;"	variable	file:
-_second_count	normal.c	7;"	variable	file:
+_second_count	normal.c	25;"	variable	file:
 _vectab	stm8_interrupt_vector.c	25;"	variable
-bool	typedef.h	27;"	typedef
-curBattCapacity	tp5602.c	6;"	variable	file:
-curBattVoltage	tp5602.c	5;"	variable	file:
-curInputVoltage	tp5602.c	7;"	variable	file:
+bool	typedef.h	31;"	typedef	typeref:enum:__anon4
+curBattCapacity	tp5602.c	7;"	variable	file:
+curBattVoltage	tp5602.c	6;"	variable	file:
+curInputVoltage	tp5602.c	8;"	variable	file:
 disp_update_flag	display.c	60;"	variable
 doubleTime	key.c	8;"	variable	file:
 enumKeyStatus	key.h	21;"	typedef	typeref:enum:__anon3
 enumKeyValue	key.h	12;"	typedef	typeref:enum:__anon2
-enumLedState	normal.c	17;"	typedef	typeref:enum:__anon1	file:
+enumLedState	normal.c	21;"	typedef	typeref:enum:__anon1	file:
+false	typedef.h	29;"	enumerator	enum:__anon4
 interrupt_handler	stm8_interrupt_vector.c	9;"	member	struct:interrupt_vector	file:
 interrupt_handler_t	stm8_interrupt_vector.c	5;"	typedef	file:
 interrupt_instruction	stm8_interrupt_vector.c	8;"	member	struct:interrupt_vector	file:
@@ -207,8 +232,10 @@ keyStatus	key.c	10;"	variable	file:
 keyTimeSecond	key.c	9;"	variable	file:
 keyValue	key.c	13;"	variable
 keyValueDouble	key.c	14;"	variable	file:
-led_state	normal.c	19;"	variable	file:
-main	main.c	75;"	function
+led_r_b_switch_delay	normal.c	37;"	variable	file:
+led_r_b_switch_index	normal.c	38;"	variable	file:
+led_state	normal.c	23;"	variable	file:
+main	main.c	91;"	function
 main	stm8_interrupt_vector.c	21;"	prototype	file:
 nop	typedef.h	14;"	macro
 pDispCallback	display.c	61;"	variable	file:
@@ -217,8 +244,13 @@ pKeyCallback	key.c	11;"	variable	file:
 s16	typedef.h	23;"	typedef
 s32	typedef.h	25;"	typedef
 s8	typedef.h	21;"	typedef
-second_count	tp5602.c	9;"	variable	file:
-tick_flag	main.c	15;"	variable	file:
+second_count	tp5602.c	10;"	variable	file:
+show_input_voltage_flag	normal.c	27;"	variable	file:
+show_voltage_second	normal.c	26;"	variable	file:
+sleep_flag	main.c	17;"	variable	file:
+tick_flag	main.c	16;"	variable	file:
+tp5602_key_press_flag	tp5602.c	11;"	variable	file:
+true	typedef.h	30;"	enumerator	enum:__anon4
 u16	typedef.h	24;"	typedef
 u32	typedef.h	26;"	typedef
 u8	typedef.h	22;"	typedef

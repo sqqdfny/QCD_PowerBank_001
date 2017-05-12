@@ -59,16 +59,15 @@ u16 GetAdc(u8 ch)
 
 void AdcTimeHook(void)
 {
-	/*if(0 == (ADC_CSR & BIT7)) return;
-	
-	_buf[_buf_index] = (((u16)ADC_DB4RL) | (((u16)ADC_DB4RH) << 8) ) & 0x3ff;
-	if(++ _buf_index > 15)
-	{
-		cur_temp = GetCurTemperatureFromAd();
-		_buf_index = 0;
-	}*/
+	//ADC_CR1 |= BIT0; //start
 }
 
+void AdcTriggerConvert(void)
+{
+}
+//==========================================================
+
+//==========================================================
 void InitAdc(void)
 {
 	PC_DDR &= ~(BIT4);
@@ -80,11 +79,11 @@ void InitAdc(void)
 	PD_CR2 &= ~(BIT2);
 	
 	CLK_PCKENR2 |= BIT3;       //ADC
-	ADC_CR1 = (7 << 4) |  BIT1 | BIT0; //18分频 连续转换
-	ADC_CR2 = BIT3 | BIT1;            //right align 扫描模式
+	ADC_CR1 = (7 << 4) | BIT1 | BIT0; //18分频
+	ADC_CR2 = BIT3 | BIT1;     //right align 扫描模式
 	ADC_CR3 = BIT7;            //data buffer enable
 	ADC_CSR = 3;
 	ADC_CR1 |= BIT0; //wakeup*/
-	//ADC_CR1 |= BIT0; //start
+	ADC_CR1 |= BIT0; //start
 }
 //==========================================================

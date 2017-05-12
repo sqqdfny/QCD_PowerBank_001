@@ -328,6 +328,11 @@ Next=Root.Source Files.normal.c
 [Root.Source Files.normal.c]
 ElemType=File
 PathName=normal.c
+Next=Root.Source Files.standby.c
+
+[Root.Source Files.standby.c]
+ElemType=File
+PathName=standby.c
 Next=Root.Source Files.stm8_interrupt_vector.c
 
 [Root.Source Files.stm8_interrupt_vector.c]

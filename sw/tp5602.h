@@ -5,7 +5,7 @@
 #define __TP5602_H__
 
 //电池电压
-u8 GetBattVoltage(void);
+u16 GetBattVoltage(void);
 
 //电池电量
 u8 GetBattCapacity(void);

@@ -10,9 +10,11 @@
 #include "delay.h"
 #include "display.h"
 #include "normal.h"
+#include "standby.h"
 #include "tp5602.h"
 
 static bool tick_flag;
+static bool sleep_flag;  //ÏµÍ³ÐÝÃß
 //==========================================================
 void SystemInit(void)
 {
@@ -25,14 +27,15 @@ void SystemInit(void)
 	ITC_SPR6 = 0;
 	ITC_SPR7 = 0;
 	
-	tick_flag = 1;
+	tick_flag = true;
+	sleep_flag = false;
 }
 //==========================================================
 //TIM1 10ms ÖÐ¶Ï 
 @far @interrupt void TIM1_UPD_OVF_IRQHandler (void)
 {
 	TIM1_SR1 = 0;  //clear interrupt flag
-	tick_flag = 1;
+	tick_flag = true;
 }
 
 static void TIM1_Init(void)
@@ -70,6 +73,19 @@ static void TIM1_Init(void)
 #endif
 //==========================================================
 
+//==========================================================
+void EnterSleep(void)
+{
+	DisplayEnterSleep();
+	EnterStandby();
+}
+
+void ExitSleep(void)
+{
+	DisplayExitSleep();
+	EnterNormal();
+}
+//==========================================================
 
 //==========================================================
 main()
@@ -93,9 +109,8 @@ main()
 	{
 		if(tick_flag)
 		{
-			tick_flag = 0;
+			tick_flag = false;
 			IWDG_Feed();
-			
 			AdcTimeHook();
 			Tp5602Funtion();
 			KeyFuntion();

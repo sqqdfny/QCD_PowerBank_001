@@ -57,6 +57,7 @@ Release\eeprom.o
 Release\key.o
 Release\main.o
 Release\normal.o
+Release\standby.o
 Release\tp5602.o
 #<END OBJECT_FILES>
 

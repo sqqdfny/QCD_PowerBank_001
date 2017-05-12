@@ -291,11 +291,21 @@ bool IsDisplay(DISP_CALLBACK * pDisp)
 //=========================================================
 void DisplayEnterSleep(void)
 {
-	
+	ALL_DISP_PIN_INPUT_F();
+	TIM2_CR1 &= ~BIT0;    //enable time2
+	CLK_PCKENR1 &= ~BIT5;  //TIM2
 }
 
 void DisplayExitSleep(void)
 {
+	CLK_PCKENR1 |= BIT5;  //TIM2
+	
+	TIM2_PSCR = 0x03;   //8 ·ÖÆµ  1M
+	TIM2_ARRH = (3333 >> 8) & 0xff;    // 300hz
+	TIM2_ARRL = (3333 & 0xff);
+	TIM2_IER = 0x01;    //enable interrupt
+	TIM2_CR1 = 0x01;    //enable time2
+	TIM2_EGR = 0x01;
 }
 //=========================================================
 void DisplayInitPoweron(void)
@@ -305,10 +315,6 @@ void DisplayInitPoweron(void)
 	PA_CR1 |=  (BIT3);
 	PA_CR2 &= ~(BIT3);
 	PA_ODR |=  (BIT3);
-	
-	PB_DDR &= ~(BIT4);
-	PB_CR1 &= ~(BIT4);
-	PB_CR2 &= ~(BIT4);
 	
 	PC_DDR |=  (BIT3 | BIT5 | BIT6 | BIT7);
 	PC_CR1 |=  (BIT3 | BIT5 | BIT6 | BIT7);
