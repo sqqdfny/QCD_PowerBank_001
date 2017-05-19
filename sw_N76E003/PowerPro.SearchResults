@@ -1,0 +1,5 @@
+---- GetAdc Matches (4 in 3 files) ----
+Adc.c (src):u16 GetAdc(u8 ch)
+Adc.h (inc):u16 GetAdc(u8 ch);
+Tp5602.c (src):		curBattVoltage = (GetAdc(ADC_CH_BATT));
+Tp5602.c (src):		curInputVoltage = (GetAdc(ADC_CH_INPUT));
