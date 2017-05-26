@@ -99,9 +99,9 @@ void AdcTimeHook(void)
 	}
 }
 
-void AdcTriggerConvert(void)
-{
-}
+//void AdcTriggerConvert(void)
+//{
+//}
 //==========================================================
 
 //==========================================================

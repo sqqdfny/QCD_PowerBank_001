@@ -17,6 +17,7 @@ static void KeyOnOff(enumKeyStatus status)
 static char Key(enumKeyValue value, enumKeyStatus status, u8 second)
 {
 	u8 flag = 0;
+	second=second;
 	switch(value)
   {
 		case KEY_VALUE_ON_OFF  :
@@ -49,6 +50,12 @@ void EnterStandby(void)
  	SetDispCallback(Display, TimeHook);
  	UpdateDisplay();
 }
+#ifndef DEBUG
+	bool IsDispStandby(void)
+	{
+		return (IsDisplay(Display));
+	}
+#endif
 //==========================================================
 //end files
 

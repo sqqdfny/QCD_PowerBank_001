@@ -8,7 +8,7 @@ bool IsLedStateOn(void);
 
 void EnterNormal(void);
 
-bool IsDispNormal(void);
+//bool IsDispNormal(void);
 
 #endif
 //==========================================================

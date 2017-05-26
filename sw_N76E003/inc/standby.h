@@ -6,6 +6,9 @@
    
 
 void EnterStandby(void);
+#ifndef DEBUG
+bool IsDispStandby(void);
+#endif
 
 #endif  //__STANDBY_H__
 //==========================================================

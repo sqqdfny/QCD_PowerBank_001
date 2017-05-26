@@ -28,42 +28,54 @@ void SystemInit(void)
 /************************************************************************************************************
 *    TIMER 0 interrupt subroutine
 ************************************************************************************************************/
-void Timer0_ISR (void) interrupt 1  //interrupt address is 0x000B
-{
-    TH0 = u8TH0_Tmp;
-    TL0 = u8TL0_Tmp;    
+void Wkt_ISR(void) interrupt 17  //interrupt address is 
+{  
+	clr_WKTF;
     tick_flag=true;
 }
 
-static void TIM0_Init(void)
+static void WKT_Init(void)
 {
-	TIMER0_MODE1_ENABLE;
-	
-	clr_T0M;	//12分频
-	u8TH0_Tmp = 0x3a;	//14999
-    u8TL0_Tmp = 0x97; 
-	
-	TH0 = u8TH0_Tmp;
-    TL0 = u8TL0_Tmp;
-	
-	set_ET0; //enable Timer0 interrupt
-	set_EA;  //enable interrupts
-    set_TR0; //Timer0 run
+	clr_WKTR;
+	clr_WKTF;
+	clr_WKPS2;
+	clr_WKPS1;
+	clr_WKPS0;
+	RWK=156;
+	set_EWKT;//使能wkt中断
+	set_WKTR;
 }
 //==========================================================
-
-
 //==========================================================
 #ifndef DEBUG
-	#define IWDG_Feed()   //(set_WDCLR)
+/***********************************************************************
+	WDT CONFIG enable 
+	warning : this macro is only when ICP not enable CONFIG WDT function
+	copy this marco code to you code to enable WDT reset.
+************************************************************************/
+	void Enable_WDT_Reset_Config(void)
+	{
+			set_IAPEN;
+			IAPAL = 0x04;
+			IAPAH = 0x00;
+			IAPFD = 0x0F;
+			IAPCN = 0xE1;
+			set_CFUEN;
+			set_IAPGO;                                  //trigger IAP
+			while((CHPCON&SET_BIT6)==SET_BIT6);          //check IAPFF (CHPCON.6)
+			clr_CFUEN;
+			clr_IAPEN;
+	}
+	#define IWDG_Feed()   set_WDCLR
 	
 	static void Iwdg_Init(void)
 	{
-// 		TA=0xAA;TA=0x55;WDCON=0x07;						//Setting WDT prescale 
-// 		set_WDCLR;														//Clear WDT timer
-// 		while((WDCON|~SET_BIT6)==0xFF);				//confirm WDT clear is ok before into power down mode
-// 		EA = 1;
-// 		set_WDTR;															//WDT run	
+		Enable_WDT_Reset_Config();
+ 		TA=0xAA;TA=0x55;WDCON=0x07;					//Setting WDT prescale 
+ 		set_WDCLR;									//Clear WDT timer
+ 		while((WDCON|~SET_BIT6)==0xFF);				//confirm WDT clear is ok before into power down mode
+ 		EA = 1;
+ 		set_WDTR;									//WDT run	
 	}
 #else
 	#define IWDG_Feed()   
@@ -95,15 +107,23 @@ main()
 	Delayms(100);
 	Iwdg_Init();
 	SystemInit();
-	
-	TP5602InitPoweron();
-	KeyInit();
-	TIM0_Init();
+
 	InitAdc();
+	KeyInit();
+	WKT_Init();
 	DisplayInitPoweron();
-	//_asm("rim");   
-	
-	//Delayms(1000);
+	TP5602InitPoweron();
+
+	/*
+	clr_P05;
+	clr_P06;
+	set_P07;
+	Delayms(1000);
+
+	clr_P05;
+	set_P06;
+	clr_P07;
+	*/
 	EnterNormal();
 	
 	IWDG_Feed();
@@ -119,7 +139,13 @@ main()
 			RefreshDisplay();
 		}
 	#ifndef DEBUG
-		//_asm("wfi");
+	if(IsDispStandby())
+	{
+		set_PD;
+	}else
+		{
+			set_IDL;
+		}
 	#endif
 	}
 }

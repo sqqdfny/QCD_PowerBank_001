@@ -9,6 +9,8 @@
 #define LED_R_B_SWITCH_DELAY     10   /*…¡À∏º‰∏Ù*/
 #define LED_R_B_SWITCH_INTERVAL  30   /*∫Ï¿∂ΩªÃÊº‰∏Ù*/
 
+#define LED_R_LONG_SWITCH_DELAY     60   /*≥§…¡À∏º‰∏Ù*/
+#define LED_R_SHORT_SWITCH_INTERVAL  10   /*∂Ã…¡À∏º‰∏Ù*/
 
 typedef enum
 {
@@ -17,7 +19,8 @@ typedef enum
 	LED_STATE_R_ON,         //ø™∫Ïµ∆
 	LED_STATE_B_ON,         //ø™¿∂µ∆
 	LED_STATE_R_B_SWITCH,   //∫Ï¿∂µ∆«–ªª
-	LED_STATE_MAX = LED_STATE_R_B_SWITCH
+	LED_STATE_SOS_SWITCH,
+	LED_STATE_MAX = LED_STATE_SOS_SWITCH
 }enumLedState;
 
 static enumLedState led_state = LED_STATE_OFF;
@@ -36,6 +39,8 @@ bool IsLedStateOn(void)
 //∫Ï¿∂…¡À∏øÿ÷∆
 static u8 led_r_b_switch_delay;
 static u8 led_r_b_switch_index;
+static u8 led_r_onoff_switch_delay;
+static u8 led_r_onoff_switch_index;
 static void Led_R_B_Switch(void)
 {
 	if(LED_STATE_R_B_SWITCH == led_state)
@@ -118,6 +123,89 @@ static void Led_R_B_Switch(void)
 		}
 	}
 }
+//SOS«Ûæ» »˝≥ß»˝∂Ã
+static void Led_R_OnOff_Switch(void)
+{
+	if(LED_STATE_SOS_SWITCH == led_state)
+	{
+		if(led_r_onoff_switch_delay --) 
+		{
+			return;
+		}
+		
+		switch(led_r_onoff_switch_index)
+		{
+			case 0:
+				LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 1;
+				break;
+			case 1:
+				LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 2;
+			  break;
+			case 2:
+			  LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 3;
+				break;
+			case 3:
+			  LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 4;
+				break;
+			case 4:
+			  LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 5;
+				break;
+			case 5:
+			  LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 6;
+				break;
+				
+			case 6:
+				LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_SHORT_SWITCH_INTERVAL;
+				led_r_onoff_switch_index = 7;
+				break;
+			case 7:
+				LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_SHORT_SWITCH_INTERVAL;
+				led_r_onoff_switch_index = 8;
+			  break;
+			case 8:
+			  LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_SHORT_SWITCH_INTERVAL;
+				led_r_onoff_switch_index = 9;
+				break;
+			case 9:
+			  LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_SHORT_SWITCH_INTERVAL;
+				led_r_onoff_switch_index = 10;
+				break;
+			case 10:
+			  LED_R_ON();
+				led_r_onoff_switch_delay = LED_R_SHORT_SWITCH_INTERVAL;
+				led_r_onoff_switch_index = 11;
+				break;
+			case 11:
+			  LED_R_OFF();
+				led_r_onoff_switch_delay = LED_R_LONG_SWITCH_DELAY;
+				led_r_onoff_switch_index = 0;
+				break;
+			default:
+			{
+				LED_R_OFF();
+			  	led_r_onoff_switch_index = 0;
+				led_r_onoff_switch_delay = 0;
+				break;
+			}
+		}
+	}
+}
 //==========================================================
 
 //==========================================================
@@ -130,6 +218,14 @@ static void KeyOnOff(enumKeyStatus status)
 		{
 			Tp5602KeyPress();
 		}
+	}
+	if((GetBattVoltage()<300)&&(false == IsConnectedInputPower()))
+	{
+		led_state = LED_STATE_OFF;
+		LED_W_OFF();
+		LED_R_OFF();
+		LED_B_OFF();
+		return;
 	}
 	
 	if(false == IsLedStateOn())
@@ -168,6 +264,10 @@ static void KeyOnOff(enumKeyStatus status)
 					led_r_b_switch_index = 0;
 					led_r_b_switch_delay = 0;
 					break;
+				case LED_STATE_SOS_SWITCH:   //∫Ïµ∆»˝≥§»˝∂Ã
+				  	LED_B_OFF();
+					led_r_onoff_switch_index=0;
+					break;
 				default:
 				{
 					led_state = LED_STATE_OFF;
@@ -191,6 +291,7 @@ static void KeyOnOff(enumKeyStatus status)
 static char Key(enumKeyValue value, enumKeyStatus status, u8 second)
 {
 	u8 flag = 0;
+	second=second;
 	switch(value)
   {
 		case KEY_VALUE_ON_OFF  :
@@ -227,8 +328,17 @@ static void TimeHook(void)
 		}
 		UpdateDisplay();
 	}
+
+	if((GetBattVoltage()<300)&&(false == IsConnectedInputPower()))
+	{
+		led_state = LED_STATE_OFF;
+		LED_W_OFF();
+		LED_R_OFF();
+		LED_B_OFF();
+	}
 	
 	Led_R_B_Switch();
+	Led_R_OnOff_Switch();
 }
 
 static void Display(void)
@@ -246,7 +356,7 @@ static void Display(void)
 	}
 	else
 	{
-		tmp	= GetBattVoltage();
+		tmp	= GetBattCapacity();
 		disp_map[0] = _led_num_tab[tmp / 100]; 
 		tmp = tmp % 100;
 		disp_map[1] = _led_num_tab[tmp / 10]; 
@@ -265,10 +375,10 @@ void EnterNormal(void)
  	UpdateDisplay();
 }
 
-bool IsDispNormal(void)
-{
-	return (IsDisplay(Display));
-}
+//bool IsDispNormal(void)
+//{
+//	return (IsDisplay(Display));
+//}
 //==========================================================
 //end files
 

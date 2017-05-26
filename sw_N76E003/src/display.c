@@ -286,11 +286,12 @@ void SetDispCallback(DISP_CALLBACK * pDisp,
 	pDispCallback = pDisp;
 	pDispTickCallback = pDispTick;
 }
-
+#ifndef DEBUG
 bool IsDisplay(DISP_CALLBACK * pDisp)
 {
 	return ((pDispCallback == pDisp) ? 1 : 0);
 }
+#endif
 //=========================================================
 
 //=========================================================

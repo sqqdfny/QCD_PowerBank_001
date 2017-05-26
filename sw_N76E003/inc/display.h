@@ -61,8 +61,9 @@ extern u8 _led_disp_map[3];
 void RefreshDisplay(void);
 void SetDispCallback(DISP_CALLBACK * pDisp, 
                             DISP_TICK_CALLBACK * pDispTick);
+#ifndef DEBUG
 bool IsDisplay(DISP_CALLBACK * pDisp);
-
+#endif
 void DisplayEnterSleep(void);
 void DisplayExitSleep(void);
 
