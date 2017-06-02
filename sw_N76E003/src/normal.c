@@ -343,24 +343,38 @@ static void TimeHook(void)
 
 static void Display(void)
 {
-	u8 disp_map[3];
+	u8 disp_map[3] = {0,0,0};
 	u16 tmp;
 	
 	if(IsConnectedInputPower() && show_input_voltage_flag)
 	{
 		tmp	= GetInputVoltage();
-		disp_map[0] = _led_num_tab[tmp / 100];
-		tmp = tmp % 100;
+		if(tmp > 99)
+		{
+			disp_map[0] = _led_num_tab[tmp / 100];
+			tmp = tmp % 100;
+		}
 		disp_map[1] = _led_num_tab[tmp / 10];
 		disp_map[2] = _led_num_tab[tmp % 10] | LCD_DP; 
 	}
 	else
 	{
 		tmp	= GetBattCapacity();
-		disp_map[0] = _led_num_tab[tmp / 100]; 
-		tmp = tmp % 100;
-		disp_map[1] = _led_num_tab[tmp / 10]; 
-		disp_map[2] = _led_num_tab[tmp % 10];
+		if(tmp > 99)
+		{
+			disp_map[0] = _led_num_tab[tmp / 100]; 
+			tmp = tmp % 100;
+			disp_map[1] = _led_num_tab[tmp / 10]; 
+			disp_map[2] = _led_num_tab[tmp % 10];
+		}
+		else
+		{
+			if(tmp > 9)
+			{
+				disp_map[0] = _led_num_tab[tmp / 10];
+			}
+			disp_map[1] = _led_num_tab[tmp % 10]; 
+		}
 	}
 	RefreshDispDataToDispMap(disp_map);
 }
