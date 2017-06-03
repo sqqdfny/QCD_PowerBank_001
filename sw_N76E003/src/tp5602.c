@@ -6,42 +6,10 @@
 static u16 curBattVoltage;
 static u8 curBattCapacity;
 static u8 curInputVoltage;
-
 static u8 second_count;
+static u8 mathBattCapacityDlySecond;  //计算电量延时计数器
 static bool tp5602_key_press_flag;
-
-code u16 voltageadd[]=
-{
-	420,//100
-	410,//90
-	400,//80
-	392,//70
-	387,//60
-	382,//50
-	379,//40 
-	377,//30
-	374,//20
-	368,//10
-	345,//5
-	300//0
-};
-
-code u16 voltagedec[]=
-{
-	400,//100
-	380,//90	
-	360,//80	
-	345,//70	
-	335,//60
-	330,//50
-	325,//40
-	320,//30
-	315,//20
-	310,//10
-	305,//5
-	300//0
-};
-
+static bool isConnectInputPower_Old;  //保存上一个检测周期的外部电源状态
 //==========================================================
 //电池电压
 u16 GetBattVoltage(void)
@@ -78,110 +46,79 @@ void Tp5602KeyPress(void)
 	P30=1;
 	tp5602_key_press_flag = false;
 }
-void CurBattCapacitySwitch(u8 i)
-{
-	switch(i)
-	{
-		case 0:
-		{
-			curBattCapacity=100;
-			break;
-		}
-		case 1:
-		{
-			curBattCapacity=90;
-			break;
-		}		
-		case 2:
-		{
-			curBattCapacity=80;
-			break;
-		}		
-		case 3:
-		{
-			curBattCapacity=70;
-			break;
-		}		
-		case 4:
-		{
-			curBattCapacity=60;
-			break;
-		}		
-		case 5:
-		{
-			curBattCapacity=50;
-			break;
-		}		
-		case 6:
-		{
-			curBattCapacity=40;
-			break;
-		}		
-		case 7:
-		{
-			curBattCapacity=30;
-			break;
-		}		
-		case 8:
-		{
-			curBattCapacity=20;
-			break;
-		}		
-		case 9:
-		{
-			curBattCapacity=10;
-			break;
-		}		
-		case 10:
-		{
-			curBattCapacity=5;
-			break;
-		}		
-		case 11:
-		{
-			curBattCapacity=0;
-			break;
-		}
-		default:
-			curBattCapacity=0;
-			break;
-	}
-}
-
 //==========================================================
 //计算电池当前剩余电量
-static void CalculationCurBattCapacity(void)
+code u16 voltageadd[]=
 {
-	u8 i;
-	static u8 lastBattCapacityflag=0xff;
-	static u8 poweronoffflag=0;
+	420,//100
+	410,//90
+	400,//80
+	390,//70
+	380,//60
+	370,//50
+	360,//40 
+	350,//30
+	340,//20
+	330,//10
+	320 //0
+};
 
+code u16 voltagedec[]=
+{
+	400,//100
+	390,//90	
+	380,//80	
+	370,//70	
+	360,//60
+	350,//50
+	340,//40
+	330,//30
+	320,//20
+	310,//10
+	300//0
+};
+static void CalculationCurBattCapacity(void)
+{ 
+	u8 i, tmp;
+	u16 voltage = curBattVoltage;
+	
+	if(mathBattCapacityDlySecond)
+	{
+		mathBattCapacityDlySecond --;
+		return;
+	}
+	
 	if(IsConnectedInputPower())
-	{				
-		for(i=0;i<12;i++)
+	{//充电
+		for(i = 0; i < 10; i ++)
 		{
-			if(GetBattVoltage()>=voltageadd[i]) break;
-		}
-		if((lastBattCapacityflag>i)||(0xff==lastBattCapacityflag)||(0==poweronoffflag))
-		{
-			CurBattCapacitySwitch(i);
-			lastBattCapacityflag=i;
-		}
-		poweronoffflag=1;
-	}else
-		{
-			for(i=0;i<12;i++)
+			if(voltage > voltageadd[i])
 			{
-				if(GetBattVoltage()>=voltagedec[i]) break;	
-			}			
-			if((lastBattCapacityflag<i)||(0xff==lastBattCapacityflag)||(1==poweronoffflag))
-			{
-				CurBattCapacitySwitch(i);
-				lastBattCapacityflag=i;
+				
+				break;
 			}
-			poweronoffflag=0;
-
 		}
+		tmp = 100 - ((i > 10) ? 10 : i) * 10;
+		if(tmp > curBattCapacity) 
+		{
+			curBattCapacity = tmp;
+		}
+	}
+	else
+	{//放电
+		for(i = 0; i < 10; i ++)
+		{
+			if(voltage > voltagedec[i])
+			{
+				break;
+			}
+		}
+		tmp = 100 - ((i > 10) ? 10 : i) * 10;
+		if(tmp < curBattCapacity) 
+		{
+			curBattCapacity = tmp;
+		}
+	}
 }
 //==========================================================
 //在主循环中每 10ms 调用一次
@@ -199,13 +136,18 @@ void Tp5602Funtion(void)
 		}
 	}
 	
-	if((second_count ++) > 10)
+	curInputVoltage = (u16)(((u32)GetAdc(ADC_CH_INPUT)*72)/GetAdc(ADC_CH_REF))+8;
+	if(isConnectInputPower_Old != IsConnectedInputPower())
+	{
+		isConnectInputPower_Old = IsConnectedInputPower();
+		mathBattCapacityDlySecond = 30;   //充电放电状态切换的30S内,不更新电量状态
+	}
+		
+	if(++ second_count > 100)
 	{
 		second_count = 0;
-		curBattVoltage = (u16)(((u32)GetAdc(ADC_CH_BATT)*180)/GetAdc(ADC_CH_REF));
+		curBattVoltage = (u16)(((u32)GetAdc(ADC_CH_BATT)*120)/GetAdc(ADC_CH_REF));
 		CalculationCurBattCapacity();
-		
-		curInputVoltage = (u16)(((u32)GetAdc(ADC_CH_INPUT)*72)/GetAdc(ADC_CH_REF))+8;
 	}
 }
 //==========================================================
@@ -219,7 +161,9 @@ void TP5602InitPoweron(void)
 	curBattVoltage = 0;
 	curBattCapacity = 0;
 	curInputVoltage = 0;
-	second_count = 0xfe;
+	second_count = 0;
+	mathBattCapacityDlySecond = 0;
+	isConnectInputPower_Old = false;
 }
 //==========================================================
 //end files

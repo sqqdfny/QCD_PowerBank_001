@@ -1,0 +1,981 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN .\obj\main.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_c51_950a\C51\BIN\A51.EXE .\obj\main.src PR(.\list\main.ls1) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; .\obj\main.SRC generated from: src\main.c
+                       2     ; COMPILER INVOKED BY:
+                       3     ;        C:\Keil_c51_950a\C51\BIN\C51.EXE src\main.c OPTIMIZE(0,SPEED) BROWSE INCDIR(.\inc)
+                              PRINT(.\list\main.lst) TABS(2) SRC(.\obj\main.SRC)
+                       4     
+                       5     $nomod51 
+                       6     
+                       7     NAME    MAIN
+                       8     
+  00F6                 9     AINDIDS DATA    0F6H
+  00B1                10     P0M1    DATA    0B1H
+  00B3                11     P1M1    DATA    0B3H
+  00B2                12     P0M2    DATA    0B2H
+  0080                13     P0      DATA    080H
+  00BB                14     SADDR_1 DATA    0BBH
+  00B4                15     P1M2    DATA    0B4H
+  0090                16     P1      DATA    090H
+  00C2                17     AA      BIT     0C0H.2
+  00AC                18     P3M1    DATA    0ACH
+  00A0                19     P2      DATA    0A0H
+  00B0                20     P3      DATA    0B0H
+  00AD                21     P3M2    DATA    0ADH
+  00D6                22     AC      BIT     0D0H.6
+  008F                23     WKCON   DATA    08FH
+  009C                24     EIE1    DATA    09CH
+  00AF                25     EA      BIT     0A8H.7
+  00D8                26     PWMCON0 DATA    0D8H
+  00DF                27     PWMCON1 DATA    0DFH
+  0097                28     AIN0    BIT     090H.7
+  0081                29     AIN1    BIT     080H.1
+  0082                30     AIN2    BIT     080H.2
+  009F                31     FE      BIT     098H.7
+  0083                32     AIN3    BIT     080H.3
+  0084                33     AIN4    BIT     080H.4
+  0085                34     AIN5    BIT     080H.5
+  00AE                35     EADC    BIT     0A8H.6
+  00D1                36     PWMPH   DATA    0D1H
+  00A8                37     IE      DATA    0A8H
+  0096                38     CKSWT   DATA    096H
+  0086                39     AIN6    BIT     080H.6
+  00EF                40     ADCF    BIT     0E8H.7
+  0087                41     AIN7    BIT     080H.7
+  00FE                42     EIP1    DATA    0FEH
+  00D9                43     PWMPL   DATA    0D9H
+  00E8                44     ADCHS0  BIT     0E8H.0
+  00C7                45     TA      DATA    0C7H
+  00E9                46     ADCHS1  BIT     0E8H.1
+  00EA                47     ADCHS2  BIT     0E8H.2
+  00AC                48     ES      BIT     0A8H.4
+  00EB                49     ADCHS3  BIT     0E8H.3
+  00C1                50     I2ADDR  DATA    0C1H
+  00BE                51     PADC    BIT     0B8H.6
+  00B8                52     IP      DATA    0B8H
+  0098                53     RI      BIT     098H.0
+  00AD                54     EBOD    BIT     0A8H.5
+  0080                55     INT0    BIT     080H.0
+  00C3                56     SI      BIT     0C0H.3
+  00D7                57     CY      BIT     0D0H.7
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     2
+
+  00EE                58     ADCS    BIT     0E8H.6
+  00FF                59     FE_1    BIT     0F8H.7
+  0081                60     INT1    BIT     080H.1
+  0099                61     TI      BIT     098H.1
+  00DE                62     LOAD    BIT     0D8H.6
+  0097                63     CKEN    DATA    097H
+  00BC                64     PS      BIT     0B8H.4
+  0081                65     SP      DATA    081H
+  0090                66     PWM0    BIT     090H.0
+  00D2                67     OV      BIT     0D0H.2
+  00B7                68     PWMINTC DATA    0B7H
+  0084                69     SS      BIT     080H.4
+  0091                70     PWM1    BIT     090H.1
+  00BD                71     PBOD    BIT     0B8H.5
+  00B2                72     P0SR    DATA    0B2H
+  0082                73     PWM2    BIT     080H.2
+  00F7                74     EIPH    DATA    0F7H
+  00B4                75     P1SR    DATA    0B4H
+  0083                76     PWM3    BIT     080H.3
+  0085                77     PWM4    BIT     080H.5
+  00AD                78     P3SR    DATA    0ADH
+  0086                79     PWM5    BIT     080H.6
+  0087                80     PWM6    BIT     080H.7
+  00F8                81     RI_1    BIT     0F8H.0
+  00F9                82     TI_1    BIT     0F8H.1
+  00CB                83     RCMP2H  DATA    0CBH
+  00CF                84     ADCMPH  DATA    0CFH
+  0080                85     P00     BIT     080H.0
+  0081                86     P01     BIT     080H.1
+  0090                87     P10     BIT     090H.0
+  00FB                88     PMEN    DATA    0FBH
+  0099                89     SBUF    DATA    099H
+  0087                90     PCON    DATA    087H
+  0082                91     P02     BIT     080H.2
+  0091                92     P11     BIT     090H.1
+  00A0                93     P20     BIT     0A0H.0
+  00CA                94     RCMP2L  DATA    0CAH
+  0083                95     P03     BIT     080H.3
+  0092                96     P12     BIT     090H.2
+  00B0                97     P30     BIT     0B0H.0
+  00E3                98     ADCDLY  DATA    0E3H
+  00CE                99     ADCMPL  DATA    0CEH
+  0084               100     P04     BIT     080H.4
+  0080               101     VREF    BIT     080H.0
+  0093               102     P13     BIT     090H.3
+  0098               103     SCON    DATA    098H
+  0085               104     P05     BIT     080H.5
+  0094               105     P14     BIT     090H.4
+  0089               106     TMOD    DATA    089H
+  0088               107     TCON    DATA    088H
+  0086               108     P06     BIT     080H.6
+  0095               109     P15     BIT     090H.5
+  0087               110     P07     BIT     080H.7
+  0096               111     P16     BIT     090H.6
+  0097               112     P17     BIT     090H.7
+  00F3               113     SPCR    DATA    0F3H
+  00BD               114     I2STAT  DATA    0BDH
+  00F5               115     SPDR    DATA    0F5H
+  00DD               116     PWMF    BIT     0D8H.5
+  00E5               117     C0H     DATA    0E5H
+  00E7               118     C1H     DATA    0E7H
+  00EE               119     C2H     DATA    0EEH
+  009F               120     CHPCON  DATA    09FH
+  0089               121     IE0     BIT     088H.1
+  008B               122     IE1     BIT     088H.3
+  00E4               123     C0L     DATA    0E4H
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     3
+
+  0091               124     SFRS    DATA    091H
+  00E6               125     C1L     DATA    0E6H
+  00C8               126     CM_RL2  BIT     0C8H.0
+  00F0               127     B       DATA    0F0H
+  00ED               128     C2L     DATA    0EDH
+  009A               129     SBUF_1  DATA    09AH
+  00A5               130     IAPUEN  DATA    0A5H
+  00F8               131     SCON_1  DATA    0F8H
+  00E0               132     ACC     DATA    0E0H
+  00A9               133     ET0     BIT     0A8H.1
+  00F4               134     SPSR    DATA    0F4H
+  00A4               135     IAPTRG  DATA    0A4H
+  008D               136     TF0     BIT     088H.5
+  00AB               137     ET1     BIT     0A8H.3
+  008F               138     TF1     BIT     088H.7
+  009A               139     RB8     BIT     098H.2
+  00CF               140     TF2     BIT     0C8H.7
+  00D7               141     FBD     DATA    0D7H
+  008C               142     TH0     DATA    08CH
+  0088               143     IT0     BIT     088H.0
+  00A8               144     EX0     BIT     0A8H.0
+  00C6               145     RH3     DATA    0C6H
+  008D               146     TH1     DATA    08DH
+  008A               147     IT1     BIT     088H.2
+  009B               148     TB8     BIT     098H.3
+  00AA               149     EX1     BIT     0A8H.2
+  00CD               150     TH2     DATA    0CDH
+  00D0               151     P       BIT     0D0H.0
+  00FA               152     PDTCNT  DATA    0FAH
+  009F               153     SM0     BIT     098H.7
+  008A               154     TL0     DATA    08AH
+  009E               155     SM1     BIT     098H.6
+  00C5               156     RL3     DATA    0C5H
+  008B               157     TL1     DATA    08BH
+  009D               158     SM2     BIT     098H.5
+  00C6               159     I2CEN   BIT     0C0H.6
+  00CC               160     TL2     DATA    0CCH
+  00B1               161     P0S     DATA    0B1H
+  009B               162     EIE     DATA    09BH
+  00B9               163     PT0     BIT     0B8H.1
+  00B3               164     P1S     DATA    0B3H
+  00BB               165     PT1     BIT     0B8H.3
+  00D3               166     RS0     BIT     0D0H.3
+  00BC               167     I2DAT   DATA    0BCH
+  00B5               168     P2S     DATA    0B5H
+  008C               169     TR0     BIT     088H.4
+  00D4               170     RS1     BIT     0D0H.4
+  00BE               171     I2CLK   DATA    0BEH
+  00AC               172     P3S     DATA    0ACH
+  008E               173     TR1     BIT     088H.6
+  00DC               174     CLRPWM  BIT     0D8H.4
+  00B8               175     PX0     BIT     0B8H.0
+  00CA               176     TR2     BIT     0C8H.2
+  00FF               177     EIPH1   DATA    0FFH
+  00BA               178     PX1     BIT     0B8H.2
+  00E8               179     ADCCON0 DATA    0E8H
+  00E1               180     ADCCON1 DATA    0E1H
+  00E2               181     ADCCON2 DATA    0E2H
+  00C0               182     I2CON   DATA    0C0H
+  0083               183     DPH     DATA    083H
+  00FA               184     RB8_1   BIT     0F8H.2
+  00EF               185     EIP     DATA    0EFH
+  00FB               186     TB8_1   BIT     0F8H.3
+  00EC               187     PIF     DATA    0ECH
+  0082               188     DPL     DATA    082H
+  00FF               189     SM0_1   BIT     0F8H.7
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     4
+
+  00FC               190     PMD     DATA    0FCH
+  00B7               191     IPH     DATA    0B7H
+  0086               192     SCL     BIT     080H.6
+  00FE               193     SM1_1   BIT     0F8H.6
+  00BF               194     I2TOC   DATA    0BFH
+  00FD               195     SM2_1   BIT     0F8H.5
+  00C3               196     ADCRH   DATA    0C3H
+  00A7               197     IAPAH   DATA    0A7H
+  009C               198     REN     BIT     098H.4
+  00AE               199     IAPFD   DATA    0AEH
+  0092               200     CAPCON0 DATA    092H
+  00C0               201     I2CPX   BIT     0C0H.0
+  00C9               202     T2MOD   DATA    0C9H
+  00C8               203     T2CON   DATA    0C8H
+  00C2               204     ADCRL   DATA    0C2H
+  00A3               205     BODCON0 DATA    0A3H
+  0093               206     CAPCON1 DATA    093H
+  00C5               207     STA     BIT     0C0H.5
+  00C4               208     T3CON   DATA    0C4H
+  00AB               209     BODCON1 DATA    0ABH
+  00A6               210     IAPAL   DATA    0A6H
+  0094               211     CAPCON2 DATA    094H
+  00F1               212     CAPCON3 DATA    0F1H
+  00F2               213     CAPCON4 DATA    0F2H
+  00DF               214     PWMRUN  BIT     0D8H.7
+  00F3               215     SPCR2   DATA    0F3H
+  00B9               216     SADEN   DATA    0B9H
+  00AF               217     IAPCN   DATA    0AFH
+  00D2               218     PWM0H   DATA    0D2H
+  00D6               219     PNP     DATA    0D6H
+  00D3               220     PWM1H   DATA    0D3H
+  00D4               221     PWM2H   DATA    0D4H
+  00A9               222     SADDR   DATA    0A9H
+  008E               223     CKCON   DATA    08EH
+  0083               224     TXD     BIT     080H.3
+  00D5               225     PWM3H   DATA    0D5H
+  00DA               226     PWM0L   DATA    0DAH
+  00C4               227     PWM4H   DATA    0C4H
+  00DB               228     PWM1L   DATA    0DBH
+  00C5               229     PWM5H   DATA    0C5H
+  00A2               230     AUXR1   DATA    0A2H
+  0095               231     CKDIV   DATA    095H
+  00DC               232     PWM2L   DATA    0DCH
+  00DD               233     PWM3L   DATA    0DDH
+  0086               234     RWK     DATA    086H
+  00D5               235     F0      BIT     0D0H.5
+  00CC               236     PWM4L   DATA    0CCH
+  00C4               237     STO     BIT     0C0H.4
+  00EC               238     ETGSEL0 BIT     0E8H.4
+  00FC               239     REN_1   BIT     0F8H.4
+  00CD               240     PWM5L   DATA    0CDH
+  00ED               241     ETGSEL1 BIT     0E8H.5
+  00E9               242     PICON   DATA    0E9H
+  00DE               243     PIOCON0 DATA    0DEH
+  00D0               244     PSW     DATA    0D0H
+  0085               245     SPICK   BIT     080H.5
+  00EA               246     PINEN   DATA    0EAH
+  00C6               247     PIOCON1 DATA    0C6H
+  00F9               248     PDTEN   DATA    0F9H
+  00AA               249     WDCON   DATA    0AAH
+  00EB               250     PIPEN   DATA    0EBH
+  00BA               251     SADEN_1 DATA    0BAH
+                     252     ?PR?SystemInit?MAIN  SEGMENT CODE 
+                     253     ?PR?BOD_Init?MAIN    SEGMENT CODE 
+                     254     ?PR?Wkt_ISR?MAIN     SEGMENT CODE 
+                     255     ?PR?WKT_Init?MAIN    SEGMENT CODE 
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     5
+
+                     256     ?PR?Iwdg_Init?MAIN   SEGMENT CODE 
+                     257     ?PR?EnterSleep?MAIN  SEGMENT CODE 
+                     258     ?PR?ExitSleep?MAIN   SEGMENT CODE 
+                     259     ?PR?main?MAIN        SEGMENT CODE 
+                     260     ?DT?MAIN             SEGMENT DATA 
+                     261             EXTRN   CODE (KeyFuntion)
+                     262             EXTRN   CODE (InitAdc)
+                     263             EXTRN   CODE (IsDispStandby)
+                     264             EXTRN   CODE (RefreshDisplay)
+                     265             EXTRN   CODE (AdcTimeHook)
+                     266             EXTRN   CODE (KeyInit)
+                     267             EXTRN   CODE (_Delayms)
+                     268             EXTRN   CODE (DisplayEnterSleep)
+                     269             EXTRN   CODE (EnterStandby)
+                     270             EXTRN   CODE (DisplayInitPoweron)
+                     271             EXTRN   CODE (EnterNormal)
+                     272             EXTRN   CODE (DisplayExitSleep)
+                     273             EXTRN   CODE (TP5602InitPoweron)
+                     274             EXTRN   CODE (Tp5602Funtion)
+                     275             EXTRN   CODE (?C_STARTUP)
+                     276             PUBLIC  u8TL0_Tmp
+                     277             PUBLIC  u8TH0_Tmp
+                     278             PUBLIC  main
+                     279             PUBLIC  ExitSleep
+                     280             PUBLIC  EnterSleep
+                     281             PUBLIC  Wkt_ISR
+                     282             PUBLIC  SystemInit
+                     283     
+----                 284             RSEG  ?DT?MAIN
+0000                 285           u8TH0_Tmp:   DS   1
+0001                 286           u8TL0_Tmp:   DS   1
+0002                 287          sleep_flag:   DS   1
+0003                 288           tick_flag:   DS   1
+                     289     ; /* MAIN.C file
+                     290     ;  * 
+                     291     ;  * Copyright (c) 2002-2005 STMicroelectronics
+                     292     ;  系统10ms唤醒一次,所有的计时都在主程序中进行
+                     293     ;  10ms中断只做定时唤醒
+                     294     ;  */
+                     295     ; #include "../inc/main.h"
+                     296     ; #include "../inc/key.h"
+                     297     ; #include "../inc/adc.h"
+                     298     ; #include "../inc/delay.h"
+                     299     ; #include "../inc/display.h"
+                     300     ; #include "../inc/normal.h"
+                     301     ; #include "../inc/standby.h"
+                     302     ; #include "../inc/tp5602.h"
+                     303     ; 
+                     304     ; static bool tick_flag;
+                     305     ; static bool sleep_flag;  //系统休眠
+                     306     ; u8 u8TH0_Tmp,u8TL0_Tmp;
+                     307     ; //==========================================================
+                     308     ; void SystemInit(void)
+                     309     
+----                 310             RSEG  ?PR?SystemInit?MAIN
+0000                 311     SystemInit:
+                     312                             ; SOURCE LINE # 20
+                     313     ; {
+                     314                             ; SOURCE LINE # 21
+                     315     ;       CKDIV = 1;  //fosc = 16M  fCPU = 8M
+                     316                             ; SOURCE LINE # 22
+0000 759501          317             MOV     CKDIV,#01H
+                     318     ;       set_CLOEN;
+                     319                             ; SOURCE LINE # 23
+0003 438E02          320             ORL     CKCON,#02H
+                     321     ;                                                                                          
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     6
+
+                                                                  // when P3.0 keep high, clock out HIRC
+                     322     ;       tick_flag = true;
+                     323                             ; SOURCE LINE # 25
+0006 750001   F      324             MOV     tick_flag,#01H
+                     325     ;       sleep_flag = false;
+                     326                             ; SOURCE LINE # 26
+0009 750000   F      327             MOV     sleep_flag,#00H
+                     328     ; }
+                     329                             ; SOURCE LINE # 27
+000C                 330     ?C0001:
+000C 22              331             RET     
+                     332     ; END OF SystemInit
+                     333     
+                     334     ; 
+                     335     ; static void BOD_Init(void)
+                     336     
+----                 337             RSEG  ?PR?BOD_Init?MAIN
+0000                 338     BOD_Init:
+                     339             USING   0
+                     340                             ; SOURCE LINE # 29
+                     341     ; {
+                     342                             ; SOURCE LINE # 30
+                     343     ; #pragma asm
+                     344     ;   MOV TA, #0AAH
+0000 75C7AA          345               MOV TA, #0AAH
+                     346     ;       MOV TA, #55H
+0003 75C755          347               MOV TA, #55H
+                     348     ;       MOV BODCON0, #0A4H    //BOEN 2.7V BORST
+0006 75A3A4          349               MOV BODCON0, #0A4H     
+                     350     ;       
+                     351               
+                     352     ;       MOV TA, #0AAH
+0009 75C7AA          353               MOV TA, #0AAH
+                     354     ;       MOV TA, #55H
+000C 75C755          355               MOV TA, #55H
+                     356     ;       MOV BODCON1, #07H    //25.6ms BODFLT
+000F 75AB07          357               MOV BODCON1, #07H     
+                     358     ; #pragma endasm
+                     359     ; }
+                     360                             ; SOURCE LINE # 40
+0012                 361     ?C0002:
+0012 22              362             RET     
+                     363     ; END OF BOD_Init
+                     364     
+----                 365     CSEG    AT      0008BH
+008B 020000   F      366             LJMP    Wkt_ISR
+                     367     
+                     368     ; //==========================================================
+                     369     ; /****************************************************************************************
+                             ********************
+                     370     ; *    TIMER 0 interrupt subroutine
+                     371     ; *****************************************************************************************
+                             *******************/
+                     372     ; void Wkt_ISR(void) interrupt 17  //interrupt address is 
+                     373     
+----                 374             RSEG  ?PR?Wkt_ISR?MAIN
+                     375             USING   0
+0000                 376     Wkt_ISR:
+                     377                             ; SOURCE LINE # 45
+                     378     ; {  
+                     379     ;       clr_WKTF;
+                     380                             ; SOURCE LINE # 47
+0000 538FEF          381             ANL     WKCON,#0EFH
+                     382     ;   tick_flag=true;
+                     383                             ; SOURCE LINE # 48
+0003 750001   F      384             MOV     tick_flag,#01H
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     7
+
+                     385     ; }
+                     386                             ; SOURCE LINE # 49
+0006                 387     ?C0003:
+0006 32              388             RETI    
+                     389     ; END OF Wkt_ISR
+                     390     
+                     391     ; 
+                     392     ; static void WKT_Init(void)
+                     393     
+----                 394             RSEG  ?PR?WKT_Init?MAIN
+0000                 395     WKT_Init:
+                     396                             ; SOURCE LINE # 51
+                     397     ; {
+                     398                             ; SOURCE LINE # 52
+                     399     ;       RWK=156;        //10MS
+                     400                             ; SOURCE LINE # 53
+0000 75869C          401             MOV     RWK,#09CH
+                     402     ;   WKCON = 0x08;   //1分频  
+                     403                             ; SOURCE LINE # 54
+0003 758F08          404             MOV     WKCON,#08H
+                     405     ;       set_EWKT;//使能wkt中断
+                     406                             ; SOURCE LINE # 55
+0006 439C04          407             ORL     EIE1,#04H
+                     408     ; }
+                     409                             ; SOURCE LINE # 56
+0009                 410     ?C0004:
+0009 22              411             RET     
+                     412     ; END OF WKT_Init
+                     413     
+                     414     ; //==========================================================
+                     415     ; 
+                     416     ; //==========================================================
+                     417     ; #if(0)   //#ifndef   DEBUG
+                     418     ; /***********************************************************************
+                     419     ;       WDT CONFIG enable 
+                     420     ;       warning : this macro is only when ICP not enable CONFIG WDT function
+                     421     ;       copy this marco code to you code to enable WDT reset.
+                     422     ; ************************************************************************/
+                     423     ;       void Enable_WDT_Reset_Config(void)
+                     424     ;       {
+                     425     ;                       set_IAPEN;
+                     426     ;                       IAPAL = 0x04;
+                     427     ;                       IAPAH = 0x00;
+                     428     ;                       IAPFD = 0x0F;
+                     429     ;                       IAPCN = 0xE1;
+                     430     ;                       set_CFUEN;
+                     431     ;                       set_IAPGO;                                  //trigger IAP
+                     432     ;                       while((CHPCON&SET_BIT6)==SET_BIT6);          //check IAPFF (CHPCON.
+                             6)
+                     433     ;                       clr_CFUEN;
+                     434     ;                       clr_IAPEN;
+                     435     ;       }
+                     436     ;       #define IWDG_Feed()   set_WDCLR
+                     437     ;       
+                     438     ;       static void Iwdg_Init(void)
+                     439     ;       {
+                     440     ;               Enable_WDT_Reset_Config();
+                     441     ;               TA=0xAA;TA=0x55;WDCON=0x07;                                     //Setting W
+                             DT prescale 
+                     442     ;               set_WDCLR;                                                                 
+                                  //Clear WDT timer
+                     443     ;               while((WDCON|~SET_BIT6)==0xFF);                         //confirm WDT clear
+                              is ok before into power down mode
+                     444     ;               EA = 1;
+                     445     ;               set_WDTR;                                                                  
+                                  //WDT run       
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     8
+
+                     446     ;       }
+                     447     ; #else
+                     448     ;       #define IWDG_Feed()   
+                     449     ;       
+                     450     ;       static void Iwdg_Init(void)
+                     451     
+----                 452             RSEG  ?PR?Iwdg_Init?MAIN
+0000                 453     Iwdg_Init:
+                     454                             ; SOURCE LINE # 93
+                     455     ;       {
+                     456                             ; SOURCE LINE # 94
+                     457     ;               
+                     458     ;       }
+                     459                             ; SOURCE LINE # 96
+0000                 460     ?C0005:
+0000 22              461             RET     
+                     462     ; END OF Iwdg_Init
+                     463     
+                     464     ; #endif
+                     465     ; //==========================================================
+                     466     ; 
+                     467     ; //==========================================================
+                     468     ; void EnterSleep(void)
+                     469     
+----                 470             RSEG  ?PR?EnterSleep?MAIN
+0000                 471     EnterSleep:
+                     472             USING   0
+                     473                             ; SOURCE LINE # 101
+                     474     ; {
+                     475                             ; SOURCE LINE # 102
+                     476     ;       DisplayEnterSleep();
+                     477                             ; SOURCE LINE # 103
+0000 120000   F      478             LCALL   DisplayEnterSleep
+                     479     ;       EnterStandby();
+                     480                             ; SOURCE LINE # 104
+0003 120000   F      481             LCALL   EnterStandby
+                     482     ; }
+                     483                             ; SOURCE LINE # 105
+0006                 484     ?C0006:
+0006 22              485             RET     
+                     486     ; END OF EnterSleep
+                     487     
+                     488     ; 
+                     489     ; void ExitSleep(void)
+                     490     
+----                 491             RSEG  ?PR?ExitSleep?MAIN
+0000                 492     ExitSleep:
+                     493             USING   0
+                     494                             ; SOURCE LINE # 107
+                     495     ; {  
+                     496                             ; SOURCE LINE # 108
+                     497     ;       DisplayExitSleep();
+                     498                             ; SOURCE LINE # 109
+0000 120000   F      499             LCALL   DisplayExitSleep
+                     500     ;       EnterNormal();
+                     501                             ; SOURCE LINE # 110
+0003 120000   F      502             LCALL   EnterNormal
+                     503     ; }
+                     504                             ; SOURCE LINE # 111
+0006                 505     ?C0007:
+0006 22              506             RET     
+                     507     ; END OF ExitSleep
+                     508     
+                     509     ; //==========================================================
+                     510     ; 
+                     511     ; //==========================================================
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE     9
+
+                     512     ; main()
+                     513     
+----                 514             RSEG  ?PR?main?MAIN
+0000                 515     main:
+                     516             USING   0
+                     517                             ; SOURCE LINE # 115
+                     518     ; {
+                     519                             ; SOURCE LINE # 116
+                     520     ;       Delayms(100);
+                     521                             ; SOURCE LINE # 117
+0000 7F64            522             MOV     R7,#064H
+0002 7E00            523             MOV     R6,#00H
+0004 120000   F      524             LCALL   _Delayms
+                     525     ;       
+                     526     ;       Iwdg_Init();
+                     527                             ; SOURCE LINE # 119
+0007 120000   F      528             LCALL   Iwdg_Init
+                     529     ;       SystemInit();
+                     530                             ; SOURCE LINE # 120
+000A 120000   F      531             LCALL   SystemInit
+                     532     ;       BOD_Init();
+                     533                             ; SOURCE LINE # 121
+000D 120000   F      534             LCALL   BOD_Init
+                     535     ;   
+                     536     ;       InitAdc();
+                     537                             ; SOURCE LINE # 123
+0010 120000   F      538             LCALL   InitAdc
+                     539     ;       KeyInit();
+                     540                             ; SOURCE LINE # 124
+0013 120000   F      541             LCALL   KeyInit
+                     542     ;       WKT_Init();
+                     543                             ; SOURCE LINE # 125
+0016 120000   F      544             LCALL   WKT_Init
+                     545     ;       DisplayInitPoweron();
+                     546                             ; SOURCE LINE # 126
+0019 120000   F      547             LCALL   DisplayInitPoweron
+                     548     ;       TP5602InitPoweron();
+                     549                             ; SOURCE LINE # 127
+001C 120000   F      550             LCALL   TP5602InitPoweron
+                     551     ; 
+                     552     ;       /*
+                     553     ;       clr_P05;
+                     554     ;       clr_P06;
+                     555     ;       set_P07;
+                     556     ;       Delayms(1000);
+                     557     ; 
+                     558     ;       clr_P05;
+                     559     ;       set_P06;
+                     560     ;       clr_P07;
+                     561     ;       */
+                     562     ;       EnterNormal();
+                     563                             ; SOURCE LINE # 139
+001F 120000   F      564             LCALL   EnterNormal
+0022                 565     ?C0008:
+                     566     ;       
+                     567     ;       IWDG_Feed();
+                     568     ;       while (1)
+                     569                             ; SOURCE LINE # 142
+                     570     ;       {
+                     571                             ; SOURCE LINE # 143
+                     572     ;               if(tick_flag)
+                     573                             ; SOURCE LINE # 144
+0022 E500     F      574             MOV     A,tick_flag
+0024 600F            575             JZ      ?C0010
+                     576     ;               {
+                     577                             ; SOURCE LINE # 145
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    10
+
+                     578     ;                       tick_flag = false;
+                     579                             ; SOURCE LINE # 146
+0026 750000   F      580             MOV     tick_flag,#00H
+                     581     ;                       IWDG_Feed();
+                     582     ;                       AdcTimeHook();
+                     583                             ; SOURCE LINE # 148
+0029 120000   F      584             LCALL   AdcTimeHook
+                     585     ;                       Tp5602Funtion();
+                     586                             ; SOURCE LINE # 149
+002C 120000   F      587             LCALL   Tp5602Funtion
+                     588     ;                       KeyFuntion();
+                     589                             ; SOURCE LINE # 150
+002F 120000   F      590             LCALL   KeyFuntion
+                     591     ;                       RefreshDisplay();
+                     592                             ; SOURCE LINE # 151
+0032 120000   F      593             LCALL   RefreshDisplay
+                     594     ;               }
+                     595                             ; SOURCE LINE # 152
+0035                 596     ?C0010:
+                     597     ;       #ifndef DEBUG
+                     598     ;       if(IsDispStandby())
+                     599                             ; SOURCE LINE # 154
+0035 120000   F      600             LCALL   IsDispStandby
+0038 EF              601             MOV     A,R7
+0039 6005            602             JZ      ?C0011
+                     603     ;       {
+                     604                             ; SOURCE LINE # 155
+                     605     ;               set_PD;
+                     606                             ; SOURCE LINE # 156
+003B 438702          607             ORL     PCON,#02H
+                     608     ;       }else
+                     609                             ; SOURCE LINE # 157
+003E 80E2            610             SJMP    ?C0008
+0040                 611     ?C0011:
+                     612     ;               {
+                     613                             ; SOURCE LINE # 158
+                     614     ;                       set_IDL;
+                     615                             ; SOURCE LINE # 159
+0040 438701          616             ORL     PCON,#01H
+                     617     ;               }
+                     618                             ; SOURCE LINE # 160
+0043                 619     ?C0012:
+                     620     ;       #endif
+                     621     ;       }
+                     622                             ; SOURCE LINE # 162
+0043 80DD            623             SJMP    ?C0008
+0045                 624     ?C0009:
+                     625     ; }
+                     626                             ; SOURCE LINE # 163
+0045                 627     ?C0013:
+0045 22              628             RET     
+                     629     ; END OF main
+                     630     
+                     631             END
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    11
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E              T Y P E  V A L U E   ATTRIBUTES
+
+?C0001. . . . . . .  C ADDR   000CH   R   SEG=?PR?SYSTEMINIT?MAIN
+?C0002. . . . . . .  C ADDR   0012H   R   SEG=?PR?BOD_INIT?MAIN
+?C0003. . . . . . .  C ADDR   0006H   R   SEG=?PR?WKT_ISR?MAIN
+?C0004. . . . . . .  C ADDR   0009H   R   SEG=?PR?WKT_INIT?MAIN
+?C0005. . . . . . .  C ADDR   0000H   R   SEG=?PR?IWDG_INIT?MAIN
+?C0006. . . . . . .  C ADDR   0006H   R   SEG=?PR?ENTERSLEEP?MAIN
+?C0007. . . . . . .  C ADDR   0006H   R   SEG=?PR?EXITSLEEP?MAIN
+?C0008. . . . . . .  C ADDR   0022H   R   SEG=?PR?MAIN?MAIN
+?C0009. . . . . . .  C ADDR   0045H   R   SEG=?PR?MAIN?MAIN
+?C0010. . . . . . .  C ADDR   0035H   R   SEG=?PR?MAIN?MAIN
+?C0011. . . . . . .  C ADDR   0040H   R   SEG=?PR?MAIN?MAIN
+?C0012. . . . . . .  C ADDR   0043H   R   SEG=?PR?MAIN?MAIN
+?C0013. . . . . . .  C ADDR   0045H   R   SEG=?PR?MAIN?MAIN
+?C_STARTUP. . . . .  C ADDR   -----       EXT
+?DT?MAIN. . . . . .  D SEG    0004H       REL=UNIT
+?PR?BOD_INIT?MAIN .  C SEG    0013H       REL=UNIT
+?PR?ENTERSLEEP?MAIN  C SEG    0007H       REL=UNIT
+?PR?EXITSLEEP?MAIN.  C SEG    0007H       REL=UNIT
+?PR?IWDG_INIT?MAIN.  C SEG    0001H       REL=UNIT
+?PR?MAIN?MAIN . . .  C SEG    0046H       REL=UNIT
+?PR?SYSTEMINIT?MAIN  C SEG    000DH       REL=UNIT
+?PR?WKT_INIT?MAIN .  C SEG    000AH       REL=UNIT
+?PR?WKT_ISR?MAIN. .  C SEG    0007H       REL=UNIT
+AA. . . . . . . . .  B ADDR   00C0H.2 A   
+AC. . . . . . . . .  B ADDR   00D0H.6 A   
+ACC . . . . . . . .  D ADDR   00E0H   A   
+ADCCON0 . . . . . .  D ADDR   00E8H   A   
+ADCCON1 . . . . . .  D ADDR   00E1H   A   
+ADCCON2 . . . . . .  D ADDR   00E2H   A   
+ADCDLY. . . . . . .  D ADDR   00E3H   A   
+ADCF. . . . . . . .  B ADDR   00E8H.7 A   
+ADCHS0. . . . . . .  B ADDR   00E8H.0 A   
+ADCHS1. . . . . . .  B ADDR   00E8H.1 A   
+ADCHS2. . . . . . .  B ADDR   00E8H.2 A   
+ADCHS3. . . . . . .  B ADDR   00E8H.3 A   
+ADCMPH. . . . . . .  D ADDR   00CFH   A   
+ADCMPL. . . . . . .  D ADDR   00CEH   A   
+ADCRH . . . . . . .  D ADDR   00C3H   A   
+ADCRL . . . . . . .  D ADDR   00C2H   A   
+ADCS. . . . . . . .  B ADDR   00E8H.6 A   
+ADCTIMEHOOK . . . .  C ADDR   -----       EXT
+AIN0. . . . . . . .  B ADDR   0090H.7 A   
+AIN1. . . . . . . .  B ADDR   0080H.1 A   
+AIN2. . . . . . . .  B ADDR   0080H.2 A   
+AIN3. . . . . . . .  B ADDR   0080H.3 A   
+AIN4. . . . . . . .  B ADDR   0080H.4 A   
+AIN5. . . . . . . .  B ADDR   0080H.5 A   
+AIN6. . . . . . . .  B ADDR   0080H.6 A   
+AIN7. . . . . . . .  B ADDR   0080H.7 A   
+AINDIDS . . . . . .  D ADDR   00F6H   A   
+AUXR1 . . . . . . .  D ADDR   00A2H   A   
+B . . . . . . . . .  D ADDR   00F0H   A   
+BODCON0 . . . . . .  D ADDR   00A3H   A   
+BODCON1 . . . . . .  D ADDR   00ABH   A   
+BOD_INIT. . . . . .  C ADDR   0000H   R   SEG=?PR?BOD_INIT?MAIN
+C0H . . . . . . . .  D ADDR   00E5H   A   
+C0L . . . . . . . .  D ADDR   00E4H   A   
+C1H . . . . . . . .  D ADDR   00E7H   A   
+C1L . . . . . . . .  D ADDR   00E6H   A   
+C2H . . . . . . . .  D ADDR   00EEH   A   
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    12
+
+C2L . . . . . . . .  D ADDR   00EDH   A   
+CAPCON0 . . . . . .  D ADDR   0092H   A   
+CAPCON1 . . . . . .  D ADDR   0093H   A   
+CAPCON2 . . . . . .  D ADDR   0094H   A   
+CAPCON3 . . . . . .  D ADDR   00F1H   A   
+CAPCON4 . . . . . .  D ADDR   00F2H   A   
+CHPCON. . . . . . .  D ADDR   009FH   A   
+CKCON . . . . . . .  D ADDR   008EH   A   
+CKDIV . . . . . . .  D ADDR   0095H   A   
+CKEN. . . . . . . .  D ADDR   0097H   A   
+CKSWT . . . . . . .  D ADDR   0096H   A   
+CLRPWM. . . . . . .  B ADDR   00D8H.4 A   
+CM_RL2. . . . . . .  B ADDR   00C8H.0 A   
+CY. . . . . . . . .  B ADDR   00D0H.7 A   
+DISPLAYENTERSLEEP .  C ADDR   -----       EXT
+DISPLAYEXITSLEEP. .  C ADDR   -----       EXT
+DISPLAYINITPOWERON.  C ADDR   -----       EXT
+DPH . . . . . . . .  D ADDR   0083H   A   
+DPL . . . . . . . .  D ADDR   0082H   A   
+EA. . . . . . . . .  B ADDR   00A8H.7 A   
+EADC. . . . . . . .  B ADDR   00A8H.6 A   
+EBOD. . . . . . . .  B ADDR   00A8H.5 A   
+EIE . . . . . . . .  D ADDR   009BH   A   
+EIE1. . . . . . . .  D ADDR   009CH   A   
+EIP . . . . . . . .  D ADDR   00EFH   A   
+EIP1. . . . . . . .  D ADDR   00FEH   A   
+EIPH. . . . . . . .  D ADDR   00F7H   A   
+EIPH1 . . . . . . .  D ADDR   00FFH   A   
+ENTERNORMAL . . . .  C ADDR   -----       EXT
+ENTERSLEEP. . . . .  C ADDR   0000H   R   SEG=?PR?ENTERSLEEP?MAIN
+ENTERSTANDBY. . . .  C ADDR   -----       EXT
+ES. . . . . . . . .  B ADDR   00A8H.4 A   
+ET0 . . . . . . . .  B ADDR   00A8H.1 A   
+ET1 . . . . . . . .  B ADDR   00A8H.3 A   
+ETGSEL0 . . . . . .  B ADDR   00E8H.4 A   
+ETGSEL1 . . . . . .  B ADDR   00E8H.5 A   
+EX0 . . . . . . . .  B ADDR   00A8H.0 A   
+EX1 . . . . . . . .  B ADDR   00A8H.2 A   
+EXITSLEEP . . . . .  C ADDR   0000H   R   SEG=?PR?EXITSLEEP?MAIN
+F0. . . . . . . . .  B ADDR   00D0H.5 A   
+FBD . . . . . . . .  D ADDR   00D7H   A   
+FE. . . . . . . . .  B ADDR   0098H.7 A   
+FE_1. . . . . . . .  B ADDR   00F8H.7 A   
+I2ADDR. . . . . . .  D ADDR   00C1H   A   
+I2CEN . . . . . . .  B ADDR   00C0H.6 A   
+I2CLK . . . . . . .  D ADDR   00BEH   A   
+I2CON . . . . . . .  D ADDR   00C0H   A   
+I2CPX . . . . . . .  B ADDR   00C0H.0 A   
+I2DAT . . . . . . .  D ADDR   00BCH   A   
+I2STAT. . . . . . .  D ADDR   00BDH   A   
+I2TOC . . . . . . .  D ADDR   00BFH   A   
+IAPAH . . . . . . .  D ADDR   00A7H   A   
+IAPAL . . . . . . .  D ADDR   00A6H   A   
+IAPCN . . . . . . .  D ADDR   00AFH   A   
+IAPFD . . . . . . .  D ADDR   00AEH   A   
+IAPTRG. . . . . . .  D ADDR   00A4H   A   
+IAPUEN. . . . . . .  D ADDR   00A5H   A   
+IE. . . . . . . . .  D ADDR   00A8H   A   
+IE0 . . . . . . . .  B ADDR   0088H.1 A   
+IE1 . . . . . . . .  B ADDR   0088H.3 A   
+INITADC . . . . . .  C ADDR   -----       EXT
+INT0. . . . . . . .  B ADDR   0080H.0 A   
+INT1. . . . . . . .  B ADDR   0080H.1 A   
+IP. . . . . . . . .  D ADDR   00B8H   A   
+IPH . . . . . . . .  D ADDR   00B7H   A   
+ISDISPSTANDBY . . .  C ADDR   -----       EXT
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    13
+
+IT0 . . . . . . . .  B ADDR   0088H.0 A   
+IT1 . . . . . . . .  B ADDR   0088H.2 A   
+IWDG_INIT . . . . .  C ADDR   0000H   R   SEG=?PR?IWDG_INIT?MAIN
+KEYFUNTION. . . . .  C ADDR   -----       EXT
+KEYINIT . . . . . .  C ADDR   -----       EXT
+LOAD. . . . . . . .  B ADDR   00D8H.6 A   
+MAIN. . . . . . . .  C ADDR   0000H   R   SEG=?PR?MAIN?MAIN
+OV. . . . . . . . .  B ADDR   00D0H.2 A   
+P . . . . . . . . .  B ADDR   00D0H.0 A   
+P0. . . . . . . . .  D ADDR   0080H   A   
+P00 . . . . . . . .  B ADDR   0080H.0 A   
+P01 . . . . . . . .  B ADDR   0080H.1 A   
+P02 . . . . . . . .  B ADDR   0080H.2 A   
+P03 . . . . . . . .  B ADDR   0080H.3 A   
+P04 . . . . . . . .  B ADDR   0080H.4 A   
+P05 . . . . . . . .  B ADDR   0080H.5 A   
+P06 . . . . . . . .  B ADDR   0080H.6 A   
+P07 . . . . . . . .  B ADDR   0080H.7 A   
+P0M1. . . . . . . .  D ADDR   00B1H   A   
+P0M2. . . . . . . .  D ADDR   00B2H   A   
+P0S . . . . . . . .  D ADDR   00B1H   A   
+P0SR. . . . . . . .  D ADDR   00B2H   A   
+P1. . . . . . . . .  D ADDR   0090H   A   
+P10 . . . . . . . .  B ADDR   0090H.0 A   
+P11 . . . . . . . .  B ADDR   0090H.1 A   
+P12 . . . . . . . .  B ADDR   0090H.2 A   
+P13 . . . . . . . .  B ADDR   0090H.3 A   
+P14 . . . . . . . .  B ADDR   0090H.4 A   
+P15 . . . . . . . .  B ADDR   0090H.5 A   
+P16 . . . . . . . .  B ADDR   0090H.6 A   
+P17 . . . . . . . .  B ADDR   0090H.7 A   
+P1M1. . . . . . . .  D ADDR   00B3H   A   
+P1M2. . . . . . . .  D ADDR   00B4H   A   
+P1S . . . . . . . .  D ADDR   00B3H   A   
+P1SR. . . . . . . .  D ADDR   00B4H   A   
+P2. . . . . . . . .  D ADDR   00A0H   A   
+P20 . . . . . . . .  B ADDR   00A0H.0 A   
+P2S . . . . . . . .  D ADDR   00B5H   A   
+P3. . . . . . . . .  D ADDR   00B0H   A   
+P30 . . . . . . . .  B ADDR   00B0H.0 A   
+P3M1. . . . . . . .  D ADDR   00ACH   A   
+P3M2. . . . . . . .  D ADDR   00ADH   A   
+P3S . . . . . . . .  D ADDR   00ACH   A   
+P3SR. . . . . . . .  D ADDR   00ADH   A   
+PADC. . . . . . . .  B ADDR   00B8H.6 A   
+PBOD. . . . . . . .  B ADDR   00B8H.5 A   
+PCON. . . . . . . .  D ADDR   0087H   A   
+PDTCNT. . . . . . .  D ADDR   00FAH   A   
+PDTEN . . . . . . .  D ADDR   00F9H   A   
+PICON . . . . . . .  D ADDR   00E9H   A   
+PIF . . . . . . . .  D ADDR   00ECH   A   
+PINEN . . . . . . .  D ADDR   00EAH   A   
+PIOCON0 . . . . . .  D ADDR   00DEH   A   
+PIOCON1 . . . . . .  D ADDR   00C6H   A   
+PIPEN . . . . . . .  D ADDR   00EBH   A   
+PMD . . . . . . . .  D ADDR   00FCH   A   
+PMEN. . . . . . . .  D ADDR   00FBH   A   
+PNP . . . . . . . .  D ADDR   00D6H   A   
+PS. . . . . . . . .  B ADDR   00B8H.4 A   
+PSW . . . . . . . .  D ADDR   00D0H   A   
+PT0 . . . . . . . .  B ADDR   00B8H.1 A   
+PT1 . . . . . . . .  B ADDR   00B8H.3 A   
+PWM0. . . . . . . .  B ADDR   0090H.0 A   
+PWM0H . . . . . . .  D ADDR   00D2H   A   
+PWM0L . . . . . . .  D ADDR   00DAH   A   
+PWM1. . . . . . . .  B ADDR   0090H.1 A   
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    14
+
+PWM1H . . . . . . .  D ADDR   00D3H   A   
+PWM1L . . . . . . .  D ADDR   00DBH   A   
+PWM2. . . . . . . .  B ADDR   0080H.2 A   
+PWM2H . . . . . . .  D ADDR   00D4H   A   
+PWM2L . . . . . . .  D ADDR   00DCH   A   
+PWM3. . . . . . . .  B ADDR   0080H.3 A   
+PWM3H . . . . . . .  D ADDR   00D5H   A   
+PWM3L . . . . . . .  D ADDR   00DDH   A   
+PWM4. . . . . . . .  B ADDR   0080H.5 A   
+PWM4H . . . . . . .  D ADDR   00C4H   A   
+PWM4L . . . . . . .  D ADDR   00CCH   A   
+PWM5. . . . . . . .  B ADDR   0080H.6 A   
+PWM5H . . . . . . .  D ADDR   00C5H   A   
+PWM5L . . . . . . .  D ADDR   00CDH   A   
+PWM6. . . . . . . .  B ADDR   0080H.7 A   
+PWMCON0 . . . . . .  D ADDR   00D8H   A   
+PWMCON1 . . . . . .  D ADDR   00DFH   A   
+PWMF. . . . . . . .  B ADDR   00D8H.5 A   
+PWMINTC . . . . . .  D ADDR   00B7H   A   
+PWMPH . . . . . . .  D ADDR   00D1H   A   
+PWMPL . . . . . . .  D ADDR   00D9H   A   
+PWMRUN. . . . . . .  B ADDR   00D8H.7 A   
+PX0 . . . . . . . .  B ADDR   00B8H.0 A   
+PX1 . . . . . . . .  B ADDR   00B8H.2 A   
+RB8 . . . . . . . .  B ADDR   0098H.2 A   
+RB8_1 . . . . . . .  B ADDR   00F8H.2 A   
+RCMP2H. . . . . . .  D ADDR   00CBH   A   
+RCMP2L. . . . . . .  D ADDR   00CAH   A   
+REFRESHDISPLAY. . .  C ADDR   -----       EXT
+REN . . . . . . . .  B ADDR   0098H.4 A   
+REN_1 . . . . . . .  B ADDR   00F8H.4 A   
+RH3 . . . . . . . .  D ADDR   00C6H   A   
+RI. . . . . . . . .  B ADDR   0098H.0 A   
+RI_1. . . . . . . .  B ADDR   00F8H.0 A   
+RL3 . . . . . . . .  D ADDR   00C5H   A   
+RS0 . . . . . . . .  B ADDR   00D0H.3 A   
+RS1 . . . . . . . .  B ADDR   00D0H.4 A   
+RWK . . . . . . . .  D ADDR   0086H   A   
+SADDR . . . . . . .  D ADDR   00A9H   A   
+SADDR_1 . . . . . .  D ADDR   00BBH   A   
+SADEN . . . . . . .  D ADDR   00B9H   A   
+SADEN_1 . . . . . .  D ADDR   00BAH   A   
+SBUF. . . . . . . .  D ADDR   0099H   A   
+SBUF_1. . . . . . .  D ADDR   009AH   A   
+SCL . . . . . . . .  B ADDR   0080H.6 A   
+SCON. . . . . . . .  D ADDR   0098H   A   
+SCON_1. . . . . . .  D ADDR   00F8H   A   
+SFRS. . . . . . . .  D ADDR   0091H   A   
+SI. . . . . . . . .  B ADDR   00C0H.3 A   
+SLEEP_FLAG. . . . .  D ADDR   0002H   R   SEG=?DT?MAIN
+SM0 . . . . . . . .  B ADDR   0098H.7 A   
+SM0_1 . . . . . . .  B ADDR   00F8H.7 A   
+SM1 . . . . . . . .  B ADDR   0098H.6 A   
+SM1_1 . . . . . . .  B ADDR   00F8H.6 A   
+SM2 . . . . . . . .  B ADDR   0098H.5 A   
+SM2_1 . . . . . . .  B ADDR   00F8H.5 A   
+SP. . . . . . . . .  D ADDR   0081H   A   
+SPCR. . . . . . . .  D ADDR   00F3H   A   
+SPCR2 . . . . . . .  D ADDR   00F3H   A   
+SPDR. . . . . . . .  D ADDR   00F5H   A   
+SPICK . . . . . . .  B ADDR   0080H.5 A   
+SPSR. . . . . . . .  D ADDR   00F4H   A   
+SS. . . . . . . . .  B ADDR   0080H.4 A   
+STA . . . . . . . .  B ADDR   00C0H.5 A   
+STO . . . . . . . .  B ADDR   00C0H.4 A   
+SYSTEMINIT. . . . .  C ADDR   0000H   R   SEG=?PR?SYSTEMINIT?MAIN
+A51 MACRO ASSEMBLER  MAIN                                                                 06/03/2017 18:38:41 PAGE    15
+
+T2CON . . . . . . .  D ADDR   00C8H   A   
+T2MOD . . . . . . .  D ADDR   00C9H   A   
+T3CON . . . . . . .  D ADDR   00C4H   A   
+TA. . . . . . . . .  D ADDR   00C7H   A   
+TB8 . . . . . . . .  B ADDR   0098H.3 A   
+TB8_1 . . . . . . .  B ADDR   00F8H.3 A   
+TCON. . . . . . . .  D ADDR   0088H   A   
+TF0 . . . . . . . .  B ADDR   0088H.5 A   
+TF1 . . . . . . . .  B ADDR   0088H.7 A   
+TF2 . . . . . . . .  B ADDR   00C8H.7 A   
+TH0 . . . . . . . .  D ADDR   008CH   A   
+TH1 . . . . . . . .  D ADDR   008DH   A   
+TH2 . . . . . . . .  D ADDR   00CDH   A   
+TI. . . . . . . . .  B ADDR   0098H.1 A   
+TICK_FLAG . . . . .  D ADDR   0003H   R   SEG=?DT?MAIN
+TI_1. . . . . . . .  B ADDR   00F8H.1 A   
+TL0 . . . . . . . .  D ADDR   008AH   A   
+TL1 . . . . . . . .  D ADDR   008BH   A   
+TL2 . . . . . . . .  D ADDR   00CCH   A   
+TMOD. . . . . . . .  D ADDR   0089H   A   
+TP5602FUNTION . . .  C ADDR   -----       EXT
+TP5602INITPOWERON .  C ADDR   -----       EXT
+TR0 . . . . . . . .  B ADDR   0088H.4 A   
+TR1 . . . . . . . .  B ADDR   0088H.6 A   
+TR2 . . . . . . . .  B ADDR   00C8H.2 A   
+TXD . . . . . . . .  B ADDR   0080H.3 A   
+U8TH0_TMP . . . . .  D ADDR   0000H   R   SEG=?DT?MAIN
+U8TL0_TMP . . . . .  D ADDR   0001H   R   SEG=?DT?MAIN
+VREF. . . . . . . .  B ADDR   0080H.0 A   
+WDCON . . . . . . .  D ADDR   00AAH   A   
+WKCON . . . . . . .  D ADDR   008FH   A   
+WKT_INIT. . . . . .  C ADDR   0000H   R   SEG=?PR?WKT_INIT?MAIN
+WKT_ISR . . . . . .  C ADDR   0000H   R   SEG=?PR?WKT_ISR?MAIN
+_DELAYMS. . . . . .  C ADDR   -----       EXT
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,7 +1,4 @@
 #include "adc.h"
-#include "normal.h"
-
-
 //==========================================================
 /*static @tiny u8 _buf_index;
 static @near u16 _buf[16];
@@ -70,7 +67,7 @@ void AdcTimeHook(void)
 {
 	u16 temp1=0,temp2=0;
 	static u8 chang_flag=0;
-	if(++chang_flag>5)
+	if(++chang_flag > 10)
 	{
 		chang_flag=0;
 		

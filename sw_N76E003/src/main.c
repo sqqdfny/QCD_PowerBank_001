@@ -25,29 +25,39 @@ void SystemInit(void)
 	tick_flag = true;
 	sleep_flag = false;
 }
+
+static void BOD_Init(void)
+{
+#pragma asm
+  MOV TA, #0AAH
+	MOV TA, #55H
+	MOV BODCON0, #0A4H    //BOEN 2.7V BORST
+	
+	MOV TA, #0AAH
+	MOV TA, #55H
+	MOV BODCON1, #07H    //25.6ms BODFLT
+#pragma endasm
+}
+//==========================================================
 /************************************************************************************************************
 *    TIMER 0 interrupt subroutine
 ************************************************************************************************************/
 void Wkt_ISR(void) interrupt 17  //interrupt address is 
 {  
 	clr_WKTF;
-    tick_flag=true;
+  tick_flag=true;
 }
 
 static void WKT_Init(void)
 {
-	clr_WKTR;
-	clr_WKTF;
-	clr_WKPS2;
-	clr_WKPS1;
-	clr_WKPS0;
-	RWK=156;
+	RWK=156;        //10MS
+  WKCON = 0x08;   //1分频  
 	set_EWKT;//使能wkt中断
-	set_WKTR;
 }
 //==========================================================
+
 //==========================================================
-#ifndef DEBUG
+#if(0)   //#ifndef   DEBUG
 /***********************************************************************
 	WDT CONFIG enable 
 	warning : this macro is only when ICP not enable CONFIG WDT function
@@ -95,7 +105,7 @@ void EnterSleep(void)
 }
 
 void ExitSleep(void)
-{
+{  
 	DisplayExitSleep();
 	EnterNormal();
 }
@@ -105,9 +115,11 @@ void ExitSleep(void)
 main()
 {
 	Delayms(100);
+	
 	Iwdg_Init();
 	SystemInit();
-
+	BOD_Init();
+  
 	InitAdc();
 	KeyInit();
 	WKT_Init();

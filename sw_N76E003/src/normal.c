@@ -375,6 +375,12 @@ static void Display(void)
 			}
 			disp_map[1] = _led_num_tab[tmp % 10]; 
 		}
+		
+		/*tmp	= GetBattVoltage();
+		disp_map[0] = _led_num_tab[tmp / 100]; 
+		tmp = tmp % 100;
+		disp_map[1] = _led_num_tab[tmp / 10]; 
+		disp_map[2] = _led_num_tab[tmp % 10];*/
 	}
 	RefreshDispDataToDispMap(disp_map);
 }
