@@ -45,7 +45,7 @@ u16 GetAdc(u8 ch)
 	{
 		case ADC_CH_BATT:
 		{
-			return(adc_tmp[0]);
+			return(4095);
 		}
 		case ADC_CH_INPUT:
 		{
@@ -71,13 +71,13 @@ void AdcTimeHook(void)
 	{
 		chang_flag=0;
 		
-		Enable_ADC_AIN7;
-		clr_ADCF;
-		set_ADCS;																	// Each time ADC start trig signal
-		
-		while(ADCF == 0);
-		adc_tmp[0]=(u32)(((u32)ADCRH<<4)|ADCRL);
-		ADCCON1&=~BIT0;
+//		Enable_ADC_AIN7;
+//		clr_ADCF;
+//		set_ADCS;																	// Each time ADC start trig signal
+//		
+//		while(ADCF == 0);
+//		adc_tmp[0]=(u32)(((u32)ADCRH<<4)|ADCRL);
+//		ADCCON1&=~BIT0;
 
 		Enable_ADC_AIN6;
 		clr_ADCF;
