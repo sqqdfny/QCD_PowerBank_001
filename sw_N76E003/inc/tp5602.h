@@ -4,13 +4,13 @@
 #ifndef __TP5602_H__
 #define __TP5602_H__
 
-//电池电压
+//电池电压 0.01V
 u16 GetBattVoltage(void);
 
-//电池电量
+//电池电量 0-100
 u8 GetBattCapacity(void);
 
-//车辆电瓶电压
+//车辆电瓶电压  0.1V
 u8 GetInputVoltage(void);
 
 //是否连接了外部电源

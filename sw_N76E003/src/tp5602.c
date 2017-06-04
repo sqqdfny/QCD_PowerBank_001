@@ -11,19 +11,19 @@ static u8 mathBattCapacityDlySecond;  //计算电量延时计数器
 static bool tp5602_key_press_flag;
 static bool isConnectInputPower_Old;  //保存上一个检测周期的外部电源状态
 //==========================================================
-//电池电压
+//电池电压  0.01V
 u16 GetBattVoltage(void)
 {
 	return (curBattVoltage);
 }
 
-//电池电量
+//电池电量 0-100
 u8 GetBattCapacity(void)
 {
 	return (curBattCapacity);
 }
 
-//车辆电瓶电压
+//车辆电瓶电压  0.1V
 u8 GetInputVoltage(void)
 {
 	return (curInputVoltage);
@@ -50,9 +50,9 @@ void Tp5602KeyPress(void)
 //计算电池当前剩余电量
 code u16 voltageadd[]=
 {
-	425,//100
+	420,//100
 	415,//90
-	405,//80
+	410,//80
 	400,//70
 	395,//60
 	385,//50
@@ -145,7 +145,7 @@ void Tp5602Funtion(void)
 	if(++ second_count > 100)
 	{
 		second_count = 0;
-		curBattVoltage = (u16)(((u32)GetAdc(ADC_CH_BATT)*120)/GetAdc(ADC_CH_REF));
+		curBattVoltage = (u16)(((u32)GetAdc(ADC_CH_BATT)*122)/GetAdc(ADC_CH_REF));
 		CalculationCurBattCapacity();
 	}
 }
