@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
   0080                55     INT0    BIT     080H.0
   00C3                56     SI      BIT     0C0H.3
   00D7                57     CY      BIT     0D0H.7
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     2
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     2
 
   00EE                58     ADCS    BIT     0E8H.6
   00FF                59     FE_1    BIT     0F8H.7
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
   0089               121     IE0     BIT     088H.1
   008B               122     IE1     BIT     088H.3
   00E4               123     C0L     DATA    0E4H
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     3
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     3
 
   0091               124     SFRS    DATA    091H
   00E6               125     C1L     DATA    0E6H
@@ -201,7 +201,7 @@ LOC  OBJ            LINE     SOURCE
   00EC               187     PIF     DATA    0ECH
   0082               188     DPL     DATA    082H
   00FF               189     SM0_1   BIT     0F8H.7
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     4
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     4
 
   00FC               190     PMD     DATA    0FCH
   00B7               191     IPH     DATA    0B7H
@@ -269,7 +269,7 @@ LOC  OBJ            LINE     SOURCE
                      253     ?PR?BOD_Init?MAIN    SEGMENT CODE 
                      254     ?PR?Wkt_ISR?MAIN     SEGMENT CODE 
                      255     ?PR?WKT_Init?MAIN    SEGMENT CODE 
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     5
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     5
 
                      256     ?PR?Iwdg_Init?MAIN   SEGMENT CODE 
                      257     ?PR?EnterSleep?MAIN  SEGMENT CODE 
@@ -337,7 +337,7 @@ LOC  OBJ            LINE     SOURCE
                      319                             ; SOURCE LINE # 23
 0003 438E02          320             ORL     CKCON,#02H
                      321     ;                                                                                          
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     6
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     6
 
                                                                   // when P3.0 keep high, clock out HIRC
                      322     ;       tick_flag = true;
@@ -405,7 +405,7 @@ LOC  OBJ            LINE     SOURCE
                      382     ;   tick_flag=true;
                      383                             ; SOURCE LINE # 48
 0003 750001   F      384             MOV     tick_flag,#01H
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     7
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     7
 
                      385     ; }
                      386                             ; SOURCE LINE # 49
@@ -473,7 +473,7 @@ LOC  OBJ            LINE     SOURCE
                      444     ;               EA = 1;
                      445     ;               set_WDTR;                                                                  
                                   //WDT run       
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     8
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     8
 
                      446     ;       }
                      447     ; #else
@@ -541,7 +541,7 @@ LOC  OBJ            LINE     SOURCE
                      509     ; //==========================================================
                      510     ; 
                      511     ; //==========================================================
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE     9
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE     9
 
                      512     ; main()
                      513     
@@ -609,7 +609,7 @@ LOC  OBJ            LINE     SOURCE
 0024 600F            575             JZ      ?C0010
                      576     ;               {
                      577                             ; SOURCE LINE # 145
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    10
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    10
 
                      578     ;                       tick_flag = false;
                      579                             ; SOURCE LINE # 146
@@ -665,7 +665,7 @@ LOC  OBJ            LINE     SOURCE
                      629     ; END OF main
                      630     
                      631             END
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    11
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    11
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -733,7 +733,7 @@ C0L . . . . . . . .  D ADDR   00E4H   A
 C1H . . . . . . . .  D ADDR   00E7H   A   
 C1L . . . . . . . .  D ADDR   00E6H   A   
 C2H . . . . . . . .  D ADDR   00EEH   A   
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    12
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    12
 
 C2L . . . . . . . .  D ADDR   00EDH   A   
 CAPCON0 . . . . . .  D ADDR   0092H   A   
@@ -801,7 +801,7 @@ INT1. . . . . . . .  B ADDR   0080H.1 A
 IP. . . . . . . . .  D ADDR   00B8H   A   
 IPH . . . . . . . .  D ADDR   00B7H   A   
 ISDISPSTANDBY . . .  C ADDR   -----       EXT
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    13
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    13
 
 IT0 . . . . . . . .  B ADDR   0088H.0 A   
 IT1 . . . . . . . .  B ADDR   0088H.2 A   
@@ -869,7 +869,7 @@ PWM0. . . . . . . .  B ADDR   0090H.0 A
 PWM0H . . . . . . .  D ADDR   00D2H   A   
 PWM0L . . . . . . .  D ADDR   00DAH   A   
 PWM1. . . . . . . .  B ADDR   0090H.1 A   
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    14
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    14
 
 PWM1H . . . . . . .  D ADDR   00D3H   A   
 PWM1L . . . . . . .  D ADDR   00DBH   A   
@@ -937,7 +937,7 @@ SS. . . . . . . . .  B ADDR   0080H.4 A
 STA . . . . . . . .  B ADDR   00C0H.5 A   
 STO . . . . . . . .  B ADDR   00C0H.4 A   
 SYSTEMINIT. . . . .  C ADDR   0000H   R   SEG=?PR?SYSTEMINIT?MAIN
-A51 MACRO ASSEMBLER  MAIN                                                                 06/04/2017 17:05:38 PAGE    15
+A51 MACRO ASSEMBLER  MAIN                                                                 06/05/2017 21:33:15 PAGE    15
 
 T2CON . . . . . . .  D ADDR   00C8H   A   
 T2MOD . . . . . . .  D ADDR   00C9H   A   

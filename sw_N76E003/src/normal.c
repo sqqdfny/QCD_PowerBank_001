@@ -219,7 +219,7 @@ static void KeyOnOff(enumKeyStatus status)
 			Tp5602KeyPress();
 		}
 	}
-	if((GetBattVoltage()<300)&&(false == IsConnectedInputPower()))
+	if((GetBattCapacity() == 0)&&(false == IsConnectedInputPower()))
 	{
 		led_state = LED_STATE_OFF;
 		LED_W_OFF();
@@ -329,7 +329,7 @@ static void TimeHook(void)
 		UpdateDisplay();
 	}
 
-	if((GetBattVoltage()<300)&&(false == IsConnectedInputPower()))
+	if((GetBattCapacity() == 0)&&(false == IsConnectedInputPower()))
 	{
 		led_state = LED_STATE_OFF;
 		LED_W_OFF();

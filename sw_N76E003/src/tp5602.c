@@ -12,10 +12,10 @@ static bool tp5602_key_press_flag;
 static bool isConnectInputPower_Old;  //保存上一个检测周期的外部电源状态
 //==========================================================
 //电池电压  0.01V
-u16 GetBattVoltage(void)
-{
-	return (curBattVoltage);
-}
+// u16 GetBattVoltage(void)
+// {
+// 	return (curBattVoltage);
+// }
 
 //电池电量 0-100
 u8 GetBattCapacity(void)
@@ -80,7 +80,8 @@ code u16 voltagedec[]=
 static void CalculationCurBattCapacity(void)
 { 
 	u8 i, tmp;
-	u16 voltage = curBattVoltage;
+	u16 voltage;
+	static u8 over_count = 0;
 	
 	if(mathBattCapacityDlySecond)
 	{
@@ -88,6 +89,7 @@ static void CalculationCurBattCapacity(void)
 		return;
 	}
 	
+	voltage = curBattVoltage;
 	if(IsConnectedInputPower())
 	{//充电
 		for(i = 0; i < 10; i ++)
@@ -100,7 +102,15 @@ static void CalculationCurBattCapacity(void)
 		tmp = 100 - ((i > 10) ? 10 : i) * 10;
 		if(tmp > curBattCapacity) 
 		{
-			curBattCapacity = tmp;
+			if(++over_count > 5)
+			{//连续5S确认是否过边界值
+				over_count = 0;
+				curBattCapacity = tmp;
+			}
+		}
+		else
+		{
+			over_count = 0;
 		}
 	}
 	else
@@ -115,7 +125,15 @@ static void CalculationCurBattCapacity(void)
 		tmp = 100 - ((i > 10) ? 10 : i) * 10;
 		if(tmp < curBattCapacity) 
 		{
-			curBattCapacity = tmp;
+			if((++over_count) > ((tmp == 0) ? 0 : 5))
+			{//连续5S确认是否过边界值
+				over_count = 0;
+				curBattCapacity = tmp;
+			}
+		}
+		else
+		{
+			over_count = 0;
 		}
 	}
 }
