@@ -4,6 +4,15 @@
  系统10ms唤醒一次,所有的计时都在主程序中进行
  10ms中断只做定时唤醒
  */
+ 
+ /*
+           b7        b6        b5        b4        b3        b2         b1         b0
+ config0   CBS       Reserved  OCDPWM    OCDEN     Reserved  RPD        LOCK       Reserved     0xf9   RST_PIN->P2.0  LOCK_EN
+ config1   Reserved  Reserved  Reserved  Reserved  Reserved  LDSIZE[2]  LDSIZE[1]  LDSIZE[0]    0xff
+ config2   CBODEN    Reserved  CBOV[1]   CBOV[0]   BOIAP     CBORST     Reserved   Reserved     0xef   2.7V
+ config3   Reserved  Reserved  Reserved  Reserved  Reserved  Reserved   Reserved   Reserved     0xff
+ config4   WDTEN[3]  WDTEN[2]  WDTEN[1]  WDTEN[0]  Reserved  Reserved   Reserved   Reserved     0xff
+ */
 #include "../inc/main.h"
 #include "../inc/key.h"
 #include "../inc/adc.h"
