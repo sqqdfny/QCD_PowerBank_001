@@ -1,0 +1,15 @@
+[WATCH_0]
+VAR_0=_key_bit_map
+VAR_1=_led_on_off_flag
+VAR_2=_led_mode
+[REGISTER_0]
+A,d PCL PCH PFLAG,b Y
+Z STKP ADM ADB ADR
+R P0 
+[LINK]
+ITEM_1=main.asm
+[HEAD]
+ITEM_1=math.h
+ITEM_2=display.h
+ITEM_3=sensor.h
+ITEM_4=key.h

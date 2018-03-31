@@ -1,0 +1,121 @@
+     1  000000             CHIP SN8P2722
+     2  00000B             .data
+     3  000B D             	_d_math_input0	ds	2     //被乘数 被除数
+     4  000D D             	_d_math_input1	ds	2     //乘数   除数
+     5  000F D             	_d_math_output0	ds 	2     //积     商
+     6  0011 D             	_d_math_output1	ds	2     //余数 
+     7  0013 D             	_count		ds	1     //循环移位计数器
+     8  0014 D             	_math_tmp0	ds	1
+     9  00008A             .code
+    10  00008A             //==================================================================================================
+    11  00008A             	__div_u8:
+    12  00008A             	//8位数除法
+    13  00008A             	//d_math_input0.dByte  = 被除数	
+    14  00008A             	//d_math_input1.dByte  = 除数		
+    15  00008A             	//d_math_output0.dByte = 商	
+    16  00008A             	//d_math_output1.dByte = 中间变量(余数)   	
+    17  00008A   2B0F(1)  		   clr		_d_math_output0    	//清0商
+    18  00008B   2B11(1)  		   clr		_d_math_output1		//清0中间变量(余数)   
+    19  00008C   2B13(1)  		   clr      _count
+    20  00008D             		div8_0:
+    21  00008D   1613(1+S)  		   incms	_count	 			//count加一
+    22  00008E   6286(1)  		   b0bclr	fc
+    23  00008F   0B0F(1)  		   rlcm		_d_math_output0    	//商左移一位至
+    24  000090                        //b0bclr	fc
+    25  000090   0B0B(1)  		   rlcm		_d_math_input0     	//被除数中间变量左移1位存入中间变量
+    26  000091   0B11(1)  		   rlcm		_d_math_output1
+    27  000092   1E11(1)  		   mov		a,_d_math_output1  	//中间变量减去除数
+    28  000093   220D(1)  		   sub		a,_d_math_input1
+    29  000094   7286(1+S)  		   b0bts0	fc 	 				//判断是否有借位，有借位被除数大于除数，没借位被除数小于除数
+    30  000095   8097(2)  		   jmp		div8_1
+    31  000096   809A(2)  		   jmp		div8_2
+    32  000097             		div8_1:         	 			//没有借位
+    33  000097   1F11(1)  		   mov		_d_math_output1,a   //得到余数
+    34  000098   680F(1)  		   b0bset	_d_math_output0.0
+    35  000099   809A(2)  		   jmp		div8_3
+    36  00009A             		div8_2:		 					//如果有借位
+    37  00009A             		   //b0bclr	_d_math_output0.0
+    38  00009A             		div8_3:
+    39  00009A   2D08(1)  		   mov		a,#8	 			//判断是否循环了8次
+    40  00009B   0713(1+S)  		   cmprs	a,_count
+    41  00009C   808D(2)  		   jmp		div8_0
+    42  00009D   0E00(2)  		   ret
+    43  00009E             
+    44  00009E             //==================================================================================================
+    45  00009E              	__div_u16:
+    46  00009E             		//16位数除法
+    47  00009E             		//d_math_input0.dWord  = 被除数	
+    48  00009E             		//d_math_input1.dWord  = 除数		
+    49  00009E             		//d_math_output0.dWord = 商	
+    50  00009E             		//d_math_output1.dWord = 中间变量(余数)   	
+    51  00009E   2B0F(1)  		   clr		_d_math_output0    		//清0商
+    52  00009F   2B10(1)  		   clr      	_d_math_output0 + 1
+    53  0000A0   2B11(1)  		   clr		_d_math_output1			//清0中间变量(余数)   
+    54  0000A1   2B12(1)  		   clr		_d_math_output1 + 1
+    55  0000A2   2B13(1)  		   clr      	_count
+    56  0000A3             		div16_0:
+    57  0000A3   1613(1+S)  		   incms	_count	 				//count加一
+    58  0000A4   6286(1)  		   b0bclr	fc
+    59  0000A5   0B0F(1)  		   rlcm		_d_math_output0    		//商左移1位
+    60  0000A6   0B10(1)  		   rlcm     	_d_math_output0 + 1
+    61  0000A7             		   //b0bclr	fc
+    62  0000A7   0B0B(1)  		   rlcm		_d_math_input0     		//被除数中间变量左移1位存入中间变量
+    63  0000A8   0B0C(1)  		   rlcm     	_d_math_input0 + 1
+    64  0000A9   0B11(1)  		   rlcm		_d_math_output1
+    65  0000AA   0B12(1)  		   rlcm     	_d_math_output1 + 1
+    66  0000AB             
+    67  0000AB   2E11(1)  		   b0mov	a,_d_math_output1  		//中间变量减去除数
+    68  0000AC   220D(1)  		   sub		a,_d_math_input1
+    69  0000AD   2F14(1)  		   b0mov    	_math_tmp0,a
+    70  0000AE   2E12(1)  		   b0mov    	a,_d_math_output1 + 1
+    71  0000AF   200E(1)  		   sbc      	a,_d_math_input1 + 1
+    72  0000B0             		   //b0mov    	_tmp1,a
+    73  0000B0   7286(1+S)  		   b0bts0	fc 	 					//判断是否有借位，有借位被除数大于除数，没借位被除数小于除数
+    74  0000B1   80B3(2)  		   jmp		div16_1
+    75  0000B2   80B8(2)  		   jmp		div16_2
+    76  0000B3             		div16_1:         	 				//没有借位
+    77  0000B3   2F12(1)  		   b0mov	_d_math_output1 + 1,a   //得到余数
+    78  0000B4   2E14(1)  		   b0mov    	a,_math_tmp0
+    79  0000B5   2F11(1)  		   b0mov    	_d_math_output1,a
+    80  0000B6   680F(1)  		   b0bset	_d_math_output0.0
+    81  0000B7   80B8(2)  		   jmp		div16_3
+    82  0000B8             		div16_2:		 					//如果有借位
+    83  0000B8             		   //b0bclr	_d_math_output0.0
+    84  0000B8             		div16_3:
+    85  0000B8   2D10(1)  		   mov		a,#16	 				//判断是否循环了16次
+    86  0000B9   0713(1+S)  		   cmprs	a,_count
+    87  0000BA   80A3(2)  		   jmp		div16_0
+    88  0000BB   0E00(2)  		   ret
+    89  0000BC             
+    90  0000BC             //==================================================================================================
+    91  0000BC             	__mul_u16_u8:
+    92  0000BC             		//16位数 x 8位数 乘法(结果不能超出16位)
+    93  0000BC             		//d_math_input0.dWord  = 被乘数	
+    94  0000BC             		//d_math_input1.dByte  = 乘数		
+    95  0000BC             		//d_math_output0.dWord = 积
+    96  0000BC   2B0F(1)  		   	clr		_d_math_output0    	//清0积
+    97  0000BD   2B10(1)  			clr		_d_math_output0 + 1
+    98  0000BE   2B11(1)  		   	clr		_d_math_output1		//清0中间变量
+    99  0000BF   2B13(1)  		   	clr     	_count
+   100  0000C0             		mul8_0:
+   101  0000C0   1613(1+S)  		   	incms		_count	 		//count加一
+   102  0000C1             
+   103  0000C1   090D(1)  			rrcm    	_d_math_input1      	//乘数右移1位
+   104  0000C2   7A86(1+S)  			b0bts1		fc  				
+   105  0000C3   80C8(2)  			jmp		mul8_1
+   106  0000C4             
+   107  0000C4   2E0B(1)  			b0mov   	a,_d_math_input0     	//被乘数加到积
+   108  0000C5   130F(1)  			add     	_d_math_output0,a
+   109  0000C6   2E0C(1)  			b0mov   	a,_d_math_input0 + 1
+   110  0000C7   1110(1)  			adc     	_d_math_output0 + 1,a
+   111  0000C8             		mul8_1:
+   112  0000C8   6286(1)  			b0bclr		fc         	 			
+   113  0000C9   0B0B(1)  		   	rlcm    	_d_math_input0  	//被乘数左移
+   114  0000CA   0B0C(1)  			rlcm    	_d_math_input0 + 1
+   115  0000CB             		mul8_2:
+   116  0000CB   2D08(1)  		   	mov		a,#8	 		//判断是否循环了8次
+   117  0000CC   0713(1+S)  		   	cmprs		a,_count
+   118  0000CD   80C0(2)  		   	jmp		mul8_0
+   119  0000CE   0E00(2)  			ret
+   120  0000CF             //==================================================================================================
+   121  0000CF             .ENDP

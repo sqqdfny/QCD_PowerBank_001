@@ -1,0 +1,146 @@
+     1  000000             //CHIP SN8P2722
+     2  000000             //	INCLUDESTD		MACRO1.H
+     3  000000             //	INCLUDESTD		MACRO2.H
+     4  000000             //	INCLUDESTD	 	MACRO3.H
+     5  00000A             .data
+     6  000A D             	_disp_map	ds	7
+     7  000A D             	_led_scan_index	ds	1
+     8  000A D             	_hc595_buf	ds	1
+     9  000A D             	_hc595_index	ds	1
+    10  000041             .code
+    11  000041             //==========================================================
+    12  000041             //宏定义
+    13  000041             	HC595_RCK_HIGH   macro	
+    14  000041             		b0bset	P5.4    
+    15  000041             		endm
+    16  000041             	HC595_RCK_LOW	macro	
+    17  000041             		b0bclr	P5.4    
+    18  000041             		endm
+    19  000041             	HC595_SCK_HIGH	macro	
+    20  000041             		b0bset	P5.3	
+    21  000041             		endm
+    22  000041             	HC595_SCK_LOW	macro	
+    23  000041             		b0bclr	P5.3	
+    24  000041             		endm
+    25  000041             	HC595_DAT_HIGH	macro	
+    26  000041             		b0bset	P0.4	
+    27  000041             		endm
+    28  000041             	HC595_DAT_LOW	macro	
+    29  000041             		b0bclr	P0.4	
+    30  000041             		endm
+    31  000041             	COM_ALL_OFF	macro
+    32  000041             		mov	a,#(0x1E)
+    33  000041             		and	P0,a
+    34  000041             		mov	a,#(0xF8)
+    35  000041             		and	P5,a
+    36  000041             		endm
+    37  000041             	COM0_ON  	macro	
+    38  000041             		b0bset	P5.1
+    39  000041             		endm
+    40  000041             	COM1_ON		macro	
+    41  000041             		b0bset	P5.0
+    42  000041             		endm
+    43  000041             	COM2_ON		macro
+    44  000041             		b0bset	P0.7
+    45  000041             		endm
+    46  000041             	COM3_ON		macro	
+    47  000041             		b0bset	P0.6
+    48  000041             		endm
+    49  000041             	COM4_ON		macro	
+    50  000041             		b0bset	P0.5
+    51  000041             		endm
+    52  000041             	COM5_ON		macro
+    53  000041             		b0bset	P5.2
+    54  000041             		endm
+    55  000041             	COM6_ON		macro	
+    56  000041             		b0bset	P0.0
+    57  000041             		endm
+    58  000041             	Hc595SendDat	macro	dat
+    59  000041             		b0mov	a,dat
+    60  000041             		b0mov	_hc595_buf,a
+    61  000041             		call	_Hc595SendDat
+    62  000041             		endm
+    63  000041             //==========================================================
+    64  000041             //函数
+    65  000041             	_Hc595SendDat:
+    66  000041             		mov	a,#(8)
+    67  000041             		b0mov	_hc595_index,a
+    68  000041             	_Hc595SendDat_start:	
+    69  000041             		b0bts1	_hc595_buf.7
+    70  000041             		jmp	_Hc595SendDat_low
+    71  000041             	_Hc595SendDat_high:
+    72  000041             		HC595_DAT_HIGH
+    73  000041             		jmp	_Hc595SendDat_exit
+    74  000041             	_Hc595SendDat_low:
+    75  000041             		HC595_DAT_LOW
+    76  000041             	_Hc595SendDat_exit:
+    77  000041             		rlcm	_hc595_buf
+    78  000041             		decms   _hc595_index
+    79  000041             		jmp	_Hc595SendDat_start
+    80  000041             		ret
+    81  000041             //==========================================================
+    82  000041             //此函数在5ms中断中调用
+    83  000041             	LedScan_ISR:
+    84  000041             		COM_ALL_OFF
+    85  000041             		b0mov	a,_led_scan_index
+    86  000041             		sub	a,#(1)
+    87  000041             		b0bts0  fc
+    88  000041             		jmp	$ + 2
+    89  000041             		mov	a,#(6)
+    90  000041             		b0mov	_led_scan_index,a	
+    91  000041             		
+    92  000041             		@JMP_A	7
+    93  000041             		jmp	LedScan_ISR_COM0
+    94  000041             		jmp	LedScan_ISR_COM1
+    95  000041             		jmp	LedScan_ISR_COM2
+    96  000041             		jmp	LedScan_ISR_COM3
+    97  000041             		jmp	LedScan_ISR_COM4
+    98  000041             		jmp	LedScan_ISR_COM5
+    99  000041             		jmp	LedScan_ISR_COM6
+   100  000041             	LedScan_ISR_COM0:
+   101  000041             		b0mov	a,_disp_map + 0
+   102  000041             		b0mov	_hc595_buf,a
+   103  000041             		call    _Hc595SendDat
+   104  000041             		COM0_ON
+   105  000041             		ret
+   106  000041             	LedScan_ISR_COM1:
+   107  000041             		b0mov	a,_disp_map + 1
+   108  000041             		b0mov	_hc595_buf,a
+   109  000041             		call    _Hc595SendDat
+   110  000041             		COM1_ON
+   111  000041             		ret
+   112  000041             	LedScan_ISR_COM2:
+   113  000041             		b0mov	a,_disp_map + 2
+   114  000041             		b0mov	_hc595_buf,a
+   115  000041             		call    _Hc595SendDat
+   116  000041             		COM2_ON
+   117  000041             		ret
+   118  000041             	LedScan_ISR_COM3:
+   119  000041             		b0mov	a,_disp_map + 3
+   120  000041             		b0mov	_hc595_buf,a
+   121  000041             		call    _Hc595SendDat
+   122  000041             		COM3_ON
+   123  000041             		ret
+   124  000041             	LedScan_ISR_COM4:
+   125  000041             		b0mov	a,_disp_map + 4
+   126  000041             		b0mov	_hc595_buf,a
+   127  000041             		call    _Hc595SendDat
+   128  000041             		COM4_ON
+   129  000041             		ret
+   130  000041             	LedScan_ISR_COM5:
+   131  000041             		b0mov	a,_disp_map + 5
+   132  000041             		b0mov	_hc595_buf,a
+   133  000041             		call    _Hc595SendDat
+   134  000041             		COM5_ON
+   135  000041             		ret
+   136  000041             	LedScan_ISR_COM6:
+   137  000041             		b0mov	a,_disp_map + 6
+   138  000041             		b0mov	_hc595_buf,a
+   139  000041             		call    _Hc595SendDat
+   140  000041             		COM6_ON
+   141  000041             		ret
+   142  000041             //==========================================================
+   143  000041             	DisplayInit:
+   144  000041             		ret
+   145  000041             //==========================================================
+   146  000041             .ENDP
