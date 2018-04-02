@@ -1,11 +1,20 @@
 [WATCH_0]
-VAR_0=_key_bit_map
-VAR_1=_led_on_off_flag
-VAR_2=_led_mode
+VAR_0=_led_on_off_flag
+VAR_1=_input_power_flag
+VAR_2=_is_output_en_flag
+VAR_3=system_idle_flag
+VAR_4=_enter_idle_dly
+VAR_5=_key_bit_map
+VAR_6=_key_dly
+VAR_7=_key_dly_flag
 [REGISTER_0]
 A,d PCL PCH PFLAG,b Y
 Z STKP ADM ADB ADR
 R P0 
+[BREAKFILE]
+ITEM_1=key.h
+[BREAKPOINT]
+ITEM_0=0_42_-1_-1_2_0
 [LINK]
 ITEM_1=main.asm
 [HEAD]

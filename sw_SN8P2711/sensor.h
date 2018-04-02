@@ -9,12 +9,12 @@
 		call	SensorADConvert
 		endm
 //========================================================================================
-	AdcDelay:
+	AdcDelay macro
 		mov	a,#(50)
 		b0mov	_adc_delay_count,a
 		decms	_adc_delay_count
 		jmp	$ - 1
-		ret
+		endm
 //========================================================================================
 	//启动一次ADC转换
 	//结果存入 _ad_buf_tmp
@@ -24,7 +24,7 @@
   		MOV A, #(0x00)
   		B0MOV VREFH, A	//Internal VREFH: 2V
 
-		call	AdcDelay
+		AdcDelay
 		b0bset	FADS			//start adc
 	SensorADConvert_wait_adc:
 		b0bts1	FEOC			//检查ADC状态标志
@@ -345,15 +345,93 @@
 		jmp	SensorMathBattCapacity_Exit
 		b0mov	a,_batt_capacity_tmp
 		b0mov	_cur_batt_capacity,a	
-//==================================================================================================
+//====================================================================
 	SensorMathBattCapacity_Exit:		
 		ret
 //==================================================================================================
-//
-SensorFuntion macro
+	SensorMathInputVolgate:
+		//V = 21 * AD / 2048
+		b0mov	a,_ad_buf_tmp+0
+		b0mov	_d_math_input0+0,a
+		b0mov	a,_ad_buf_tmp+1
+		b0mov	_d_math_input0+1,a
+		mov	a,#(21)
+		b0mov	_d_math_input1+0,a
+		call	__mul_u16_u8
 		
+		b0mov	a,_d_math_output0+0
+		b0mov	_d_math_input0+0,a
+		b0mov	a,_d_math_output0+1
+		b0mov	_d_math_input0+1,a
+		mov	a,#((2048 >> 8) & 0xFF)
+		b0mov	_d_math_input1+0,a
+		mov	a,#((2048) & 0xFF)
+		b0mov	_d_math_input1+1,a
+		call	__div_u16_u16
+
+		b0mov	a,_d_math_output0+0
+		b0mov	_cur_input_volgate,a
+		sub	a,#(90)
+		b0bts1	fc
+		jmp	$+3
+		b0bset	_input_power_flag
+		jmp	$+2
+		b0bclr	_input_power_flag
+		ret
+//==================================================================================================
+//
+	SensorFuntion macro
+		incms	_adc_ch_dly
+		nop
+		b0mov	a,_adc_ch_dly
+		sub	a,#(10)
+		b0bts1	fc
+		jmp	SensorFuntion_END  		
+		clr	_adc_ch_dly
+	SensorFuntion_start_adc:
+		b0mov	a,_adc_ch_index
+		@JMP_A	3
+		jmp	SensorFuntion_BATT   
+		jmp	SensorFuntion_INPUT   
+		jmp	SensorFuntion_OUTPUT
+	SensorFuntion_BATT:
+		SensorADConvert_CH 5
+                call	SensorMathBattCapacity
+		mov	a,#(1)
+		b0mov	_adc_ch_index,a
+		jmp	SensorFuntion_END
+	SensorFuntion_INPUT:
+		SensorADConvert_CH 3
+		call	SensorMathInputVolgate
 	
+		mov	a,#(2)
+		b0mov	_adc_ch_index,a
+		jmp	SensorFuntion_END
+	SensorFuntion_OUTPUT:
+		b0bts1	P4.4
+		jmp	$+3
+		b0bset 	_is_output_en_flag
+		jmp	$+2
+		b0bclr	_is_output_en_flag
+
+		mov	a,#(0)
+		b0mov	_adc_ch_index,a
+	SensorFuntion_END:
 		endm
+//========================================================================================
+	SensorFuntion_IDLE:
+		//SensorADConvert_CH 3
+		//call	SensorMathInputVolgate
+		//mov	a,#(0)
+		//b0mov	ADM,a
+
+		b0bts1	P4.4
+		jmp	$+3
+		b0bset 	_is_output_en_flag
+		jmp	$+2
+		b0bclr	_is_output_en_flag
+	SensorFuntion_IDLE_END:
+		ret
 //========================================================================================
 	SensorInit macro
 		endm

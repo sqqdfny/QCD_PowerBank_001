@@ -32,8 +32,13 @@ CHIP SN8P2711B
 	_led_on_off_flag	equ	flag0.5		//0->LED_OFF	1->LED_ON
 	_lcd_init_flag		equ	flag0.6		//此标志为1表示LCD上电全显已执行过
 	_is_output_en_flag	equ	flag0.7		//0->升压输出未开启 1->升压输出开启
+
+	flag1			ds	1
+	_key_dly_flag		equ	flag1.0
+
 	tmp			ds	1		//临时变量
 	_50ms_count		ds	1		//50ms计时
+	_enter_idle_dly		ds	1		//按键唤醒后,延时进入IDLE
 	
 	//math.h
 	_d_math_input0		ds	3     //被乘数 被除数
@@ -67,7 +72,9 @@ CHIP SN8P2711B
 	
 	//key.h
 	_key_bit_map		ds	1	//每50MS采集一次按键状态,移位存入,挤掉最旧的位
+	_key_dly		ds	1	//检测到一次按键后,延时一段时间再检测按键
 	_led_mode		ds	1	//LED模式
+	_led_mode_sub		ds	1	//对应模式下的亮灯控制
 	_led_dly		ds	1	//LED控制延时
 
 .code
@@ -86,18 +93,15 @@ CHIP SN8P2711B
 ; ClrRAM
 ; Use index @YZ to clear RAM 
 ;-------------------------------------------------------------------------------
-__ClrRAM:
-
+__ClrRAM macro
 	CLR 		Y
 	B0MOV		Z,#0x3f
-
 ClrRAM10:
 	CLR 		@YZ
 	DECMS		Z
 	JMP 		ClrRAM10
 	CLR 		@YZ
-
-	RET
+	endm
 
 reset:
 //_IO_Setting:
@@ -113,7 +117,7 @@ reset:
   	MOV A, #(0x00)
   	B0MOV P4UR, A		//P4 pull up value
   	MOV A, #(0x08)
-  	B0MOV P4CON, A	//P4 Analog-Digital value
+  	B0MOV P4CON, A		//P4 Analog-Digital value
   	MOV A, 0x00
   	B0MOV P4, A		//P4 register value
 
@@ -122,7 +126,7 @@ reset:
   	MOV A, #(0x00)
   	B0MOV P5UR, A		//P5 pull up value
   	MOV A, 0x00
-  	B0MOV P5, A	                //P5 register value
+  	B0MOV P5, A	        //P5 register value
 //_Timer_Setting:
 	MOV A, #0x24
 	B0MOV TC0M, A	//TC0M register value, Fcpu: 4.000000MHZ
@@ -137,13 +141,15 @@ reset:
 	B0BSET FTC0ENB	//TC0 enable
 	B0BSET FTC0GN
 	
-	call	__ClrRAM
+	__ClrRAM
 	SensorInit
 	KeyInit
 	DisplayInit
 
   	B0BSET FGIE
 	b0bclr	system_idle_flag
+	mov	a,#(SYSTEM_TICK * 5)
+	b0mov	_enter_idle_dly,a
 public _main
 _main:
 	MOV 	A, #(0x5A)
@@ -157,81 +163,53 @@ _main:
 	jmp	_main
 	b0bclr	system_tick_flag
 //================================================
-//SensorFuntion
-		incms	_adc_ch_dly
-		nop
-		b0mov	a,_adc_ch_dly
-		sub	a,#(10)
-		b0bts1	fc
-		jmp	SensorFuntion_END  		
-		clr	_adc_ch_dly
-	SensorFuntion_start_adc:
-		b0mov	a,_adc_ch_index
-		@JMP_A	3
-		jmp	SensorFuntion_BATT   
-		jmp	SensorFuntion_INPUT   
-		jmp	SensorFuntion_OUTPUT
-	SensorFuntion_BATT:
-		SensorADConvert_CH 5
-                call	SensorMathBattCapacity
-		mov	a,#(1)
-		b0mov	_adc_ch_index,a
-		jmp	SensorFuntion_END
-	SensorFuntion_INPUT:
-		SensorADConvert_CH 3
-	
-		//V = 21 * AD / 2048
-		b0mov	a,_ad_buf_tmp+0
-		b0mov	_d_math_input0+0,a
-		b0mov	a,_ad_buf_tmp+1
-		b0mov	_d_math_input0+1,a
-		mov	a,#(21)
-		b0mov	_d_math_input1+0,a
-		call	__mul_u16_u8
-		
-		b0mov	a,_d_math_output0+0
-		b0mov	_d_math_input0+0,a
-		b0mov	a,_d_math_output0+1
-		b0mov	_d_math_input0+1,a
-		mov	a,#((2048 >> 8) & 0xFF)
-		b0mov	_d_math_input1+0,a
-		mov	a,#((2048) & 0xFF)
-		b0mov	_d_math_input1+1,a
-		call	__div_u16_u16
+		SensorFuntion
+	call	KeyFuntion
+		LedFunction
+		DisplayFuntion
+		//GreenMode
+//================================================
+		b0bts0	_input_power_flag
+		jmp	_main
+		b0bts0	_led_on_off_flag
+		jmp	_main
+		b0bts0	_is_output_en_flag
+		jmp	_main
 
-		b0mov	a,_d_math_output0+0
-		b0mov	_cur_input_volgate,a
-		sub	a,#(90)
-		b0bts1	fc
-		jmp	$+3
-		b0bset	_input_power_flag
-		jmp	$+2
-		b0bclr	_input_power_flag
-	
-		mov	a,#(2)
-		b0mov	_adc_ch_index,a
-		jmp	SensorFuntion_END
-	SensorFuntion_OUTPUT:
-		b0bts1	P4.4
-		jmp	$+3
-		b0bset 	_is_output_en_flag
-		jmp	$+2
-		b0bclr	_is_output_en_flag
+		decms	_enter_idle_dly
+		jmp	_main
+		
+_main_system_normal_function_enter_idle:
+		b0bclr	FTC0ENB			//stop timer
+		COM_ALL_LOW			//turnoff disp
 
 		mov	a,#(0)
-		b0mov	_adc_ch_index,a
-	SensorFuntion_END:
-//================================================
-	
-		KeyFuntion
-		call	LedFunction
-		DisplayFuntion
+		b0mov	ADM,a
+
+		b0bset	system_idle_flag
+		SlowMode
 		jmp	_main
 //====================================================================
 //IDLE
 _main_system_idle_function:
-_main_end:
-	//GreenMode
+        	call	SensorFuntion_IDLE
+
+		b0bts1	KEY_INPUT
+		jmp	_main_system_idle_function_exit_idle_key
+		b0bts0	_input_power_flag
+		jmp	_main_system_idle_function_exit_idle
+		b0bts0	_led_on_off_flag
+		jmp	_main_system_idle_function_exit_idle
+		b0bts0	_is_output_en_flag
+		jmp	_main_system_idle_function_exit_idle
+		jmp	_main
+_main_system_idle_function_exit_idle_key:
+		mov	a,#(SYSTEM_TICK * 5)
+		b0mov	_enter_idle_dly,a
+_main_system_idle_function_exit_idle:
+		Slow2Normal
+		b0bclr	system_idle_flag
+		b0bset 	FTC0ENB			//start timer
   	JMP _main
 
 isr:
