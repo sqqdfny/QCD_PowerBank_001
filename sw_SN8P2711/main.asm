@@ -34,7 +34,7 @@ CHIP SN8P2711B
 	_is_output_en_flag	equ	flag0.7		//0->升压输出未开启 1->升压输出开启
 
 	flag1			ds	1
-	_key_dly_flag		equ	flag1.0
+	_key_long_flag		equ	flag1.0		//长按执行标记,避免重复响应
 
 	tmp			ds	1		//临时变量
 	_50ms_count		ds	1		//50ms计时
@@ -71,8 +71,13 @@ CHIP SN8P2711B
 	_adc_ch_dly		ds	1	//通道采集切换延时
 	
 	//key.h
-	_key_bit_map		ds	1	//每50MS采集一次按键状态,移位存入,挤掉最旧的位
-	_key_dly		ds	1	//检测到一次按键后,延时一段时间再检测按键
+	key_value_tmp		ds	1
+	key_value_old		ds	1
+	key_value_cur		ds	1
+	key_hold_tick		ds	1
+	key_state_cur		ds	1
+	key_repeat_tick		ds	1
+
 	_led_mode		ds	1	//LED模式
 	_led_mode_sub		ds	1	//对应模式下的亮灯控制
 	_led_dly		ds	1	//LED控制延时
@@ -164,7 +169,7 @@ _main:
 	b0bclr	system_tick_flag
 //================================================
 		SensorFuntion
-	call	KeyFuntion
+	 	KeyFuntion
 		LedFunction
 		DisplayFuntion
 		//GreenMode
