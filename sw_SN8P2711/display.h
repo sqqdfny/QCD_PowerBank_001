@@ -269,7 +269,7 @@
 DisplayFuntion	macro
 		decms	_disp_swap_dly
 		jmp	DisplayFuntion_start_0
-		mov	a,#(SYSTEM_TICK * 3)
+		mov	a,#(SYSTEM_TICK * 5)
 		b0mov	_disp_swap_dly,a
 		
 		b0bts1  _input_power_flag

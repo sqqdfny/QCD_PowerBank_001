@@ -57,12 +57,8 @@ CHIP SN8P2711B
 	//sensor.h
 	_adc_ch_index		ds	1	//当前ADC通道
 	_ad_buf_tmp		ds	2	//AD转换的结果缓冲,主要是用于做移位和对齐
-	//_ad_buf_l		ds	6	//此数据用于做平均值滤波,去掉最大值与最小值
-	//_ad_buf_h		ds	6
-	//_ad_buf_l_sort		ds	6	//此数据用于做平均值滤波,去掉最大值与最小值
-	//_ad_buf_h_sort		ds	6
-	_ad_buf_index		ds	1	//
-	_ad_buf_sort_i		ds	1	//用于对多组AD数据进行排序
+	_ad_bolgate_buf		ds	2	//输入电压平均值计算
+	
 	_cur_input_volgate	ds	1	//当前输入电压
 	_cur_batt_capacity	ds	1	//当前电池电量
 	_batt_capacity_tmp	ds	1
@@ -197,7 +193,7 @@ _main_system_normal_function_enter_idle:
 //====================================================================
 //IDLE
 _main_system_idle_function:
-        	call	SensorFuntion_IDLE
+        	SensorFuntion_IDLE
 
 		b0bts1	KEY_INPUT
 		jmp	_main_system_idle_function_exit_idle_key
